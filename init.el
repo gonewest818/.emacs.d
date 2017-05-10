@@ -67,6 +67,9 @@
 ;; rainbow delimiters
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
+;; vertical alignment
+(setq clojure-align-forms-automatically 't)
+
 ;; custom clojure-mode indentation
 (require 'clojure-mode)
 (define-clojure-indent
