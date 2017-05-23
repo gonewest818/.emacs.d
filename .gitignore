@@ -1,4 +1,7 @@
+.erc-auth
 ido.last
-auto-save-list/*
-backups/*
-elpa/*
+auto-save-list/
+backups/
+elpa/
+eshell/
+url/

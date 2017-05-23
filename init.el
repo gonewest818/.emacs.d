@@ -25,12 +25,12 @@
                       clojure-mode
                       cider
                       company
-                      ; parinfer
                       paredit
                       zenburn-theme
                       monokai-theme
                       rainbow-delimiters
-                      highlight-symbol))
+                      highlight-symbol
+                      markdown-mode))
 
 (dolist (p my-packages)
   (unless (package-installed-p p)
@@ -41,11 +41,6 @@
 
 ;; adjust so that lein is in the path
 (add-to-list 'exec-path "/usr/local/bin")
-
-;; parinfer configuration
-;(setq parinfer-extensions '(defaults pretty-parens smart-tab smart-yank))
-;(global-set-key [?\C-,] 'parinfer-toggle-mode)
-;(add-hook 'clojure-mode-hook #'parinfer-mode)
 
 ;; paredit configuration
 (add-hook 'clojure-mode-hook #'paredit-mode)
@@ -95,9 +90,42 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Other packages, not related to clojure development
 
-;;  org-mode export to markdown 
+;; org-mode export to markdown 
 (eval-after-load "org"
   '(require 'ox-md nil t))
+
+;; ERC mode channel and server configuration
+
+(load "~/.emacs.d/.erc-auth")
+
+(setq erc-nickserv-passwords
+      `((freenode    (("gonewest"    . ,my-freenode-pass)
+                      ("gonewest818" . ,my-freenode-pass)))
+        (QuakeNet    (("gonewest818" . ,my-quakenet-pass)))))
+
+(setq erc-autojoin-channels-alist '(("freenode" "#emacs"
+                                                "#leiningen")
+                                    ("QuakeNet" "#overwatch")))
+
+(require 'erc-services)
+(erc-services-mode 1)
+(setq erc-prompt-for-nickserv-password nil)
+
+;; ERC track mode
+(require 'erc-track)
+(setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
+                                "324" "329" "332" "333" "353" "477"))
+(setq erc-track-exclude-server-buffer t)
+(erc-track-mode 1)
+
+;; hotkeys to join servers
+(global-set-key "\C-cef" (lambda () (interactive)
+                           (erc :server "irc.freenode.net" :port "6667"
+                                :nick "gonewest818")))
+
+(global-set-key "\C-ceq" (lambda () (interactive)
+                           (erc :server "irc.quakenet.org" :port "6667"
+                                :nick "gonewest818")))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -299,7 +327,7 @@
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (rainbow-delimiters projectile monokai-theme highlight-symbol helm-ag company cider better-defaults)))
+    (markdown-mode rainbow-delimiters projectile monokai-theme highlight-symbol helm-ag company cider better-defaults)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
