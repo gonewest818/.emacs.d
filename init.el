@@ -7,14 +7,18 @@
 (add-to-list 'package-archives          ; melpa stable
              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
-;;(add-to-list 'package-archives        ; melpa latest
-;;             '("melpa" . "http://melpa.org/packages/") t)
-
 ;; marmalade repo
 (add-to-list 'package-archives          ; marmalade
              '("marmalade" . "https://marmalade-repo.org/packages/") t)
 
+;; manual initialization, see Stack Overflow [http://bit.ly/2tu5N8s] 
+(setq package-enable-at-startup nil)
 (package-initialize)
+
+;; refresh package archive contents only if it's empty
+;; if you need to update packages, do it manually
+(when (not package-archive-contents)
+    (package-refresh-contents))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CLOJURE / CIDER CONFIGURATION
@@ -38,9 +42,6 @@
 
 ;; Set the default comment column to 60
 (setq-default comment-column 60)
-
-;; adjust so that lein is in the path
-(add-to-list 'exec-path "/usr/local/bin")
 
 ;; paredit configuration
 (add-hook 'clojure-mode-hook #'paredit-mode)
@@ -89,6 +90,12 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Other packages, not related to clojure development
+
+;; adjust exec-path as necessary because OSX window system launch
+;; doesn't respect your shell config
+(add-to-list 'exec-path "/usr/local/bin")
+;; make sure PATH also matches, for eshell
+(setenv "PATH" (mapconcat 'identity exec-path ":"))
 
 ;; org-mode export to markdown 
 (eval-after-load "org"
