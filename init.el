@@ -305,9 +305,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; KEYBOARD BINDING
 
-(global-set-key [f9] 'cider-jack-in)
-;;(global-set-key [apps] 'other-frame)
-(global-set-key [f11] 'speedbar)
+(global-set-key [f9]    'cider-jack-in)
+(global-set-key [C-tab] 'other-window)
+;;(global-set-key [f11]   'speedbar)
 
 (setq company-minimum-prefix-length 2)
 (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
