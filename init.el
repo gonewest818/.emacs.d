@@ -5,7 +5,7 @@
 
 ;; set up package archives
 (add-to-list 'package-archives          ; melpa stable
-             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;; marmalade repo
 (add-to-list 'package-archives          ; marmalade
@@ -40,9 +40,6 @@
   (unless (package-installed-p p)
     (package-install p)))
 
-;; Set the default comment column to 60
-(setq-default comment-column 60)
-
 ;; paredit configuration
 (add-hook 'clojure-mode-hook #'paredit-mode)
 
@@ -57,11 +54,17 @@
 ;; Replace return key with newline-and-indent when in cider mode.
 (add-hook 'cider-mode-hook '(lambda () (local-set-key (kbd "RET") 'newline-and-indent)))
 
+;; rainbow delimiters
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
 ;; Show parenthesis mode
 (show-paren-mode 1)
 
-;; rainbow delimiters
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+;; Set the default comment column to 60
+(setq-default comment-column 60)
+
+;; pretty printing (via fipp, the default)
+(setq cider-repl-use-pretty-printing 't)
 
 ;; vertical alignment
 (setq clojure-align-forms-automatically 't)
@@ -110,9 +113,13 @@
                       ("gonewest818" . ,my-freenode-pass)))
         (QuakeNet    (("gonewest818" . ,my-quakenet-pass)))))
 
-(setq erc-autojoin-channels-alist '(("freenode" "#emacs"
-                                                "#leiningen"
-                                                "#datomic")
+(setq erc-autojoin-channels-alist '(("freenode" "#clojure"
+                                                "#clojurescript"
+                                                "#clojure-beginners"
+                                                "#clojure-emacs"
+                                                "#emacs"
+                                                "#datomic"
+                                                "#leiningen")
                                     ("QuakeNet" "#overwatch")))
 
 (require 'erc-services)
@@ -193,6 +200,8 @@
 (load-theme 'zenburn t)
 (nokamoto-customize-zenburn)
 
+(setq inhibit-startup-screen t)
+
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
 
@@ -218,6 +227,7 @@
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; KEYBOARD BINDING
 
@@ -232,52 +242,3 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; liberally copied from
-;; http://fgiasson.com/blog/index.php/2016/06/14/my-optimal-gnu-emacs-settings-for-developing-clojure-revised/
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
- '(custom-safe-themes
-   (quote
-    ("bfdcbf0d33f3376a956707e746d10f3ef2d8d9caa1c214361c9c08f00a1c8409" default)))
- '(fci-rule-color "#383838")
- '(inhibit-startup-screen t)
- '(nrepl-message-colors
-   (quote
-    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
- '(package-selected-packages
-   (quote
-    (magit markdown-mode rainbow-delimiters projectile monokai-theme highlight-symbol helm-ag company cider better-defaults)))
- '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
- '(vc-annotate-background "#2B2B2B")
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#BC8383")
-     (40 . "#CC9393")
-     (60 . "#DFAF8F")
-     (80 . "#D0BF8F")
-     (100 . "#E0CF9F")
-     (120 . "#F0DFAF")
-     (140 . "#5F7F5F")
-     (160 . "#7F9F7F")
-     (180 . "#8FB28F")
-     (200 . "#9FC59F")
-     (220 . "#AFD8AF")
-     (240 . "#BFEBBF")
-     (260 . "#93E0E3")
-     (280 . "#6CA0A3")
-     (300 . "#7CB8BB")
-     (320 . "#8CD0D3")
-     (340 . "#94BFF3")
-     (360 . "#DC8CC3"))))
- '(vc-annotate-very-old-color "#DC8CC3"))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
