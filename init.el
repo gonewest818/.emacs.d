@@ -20,14 +20,12 @@
 (when (not package-archive-contents)
     (package-refresh-contents))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; CLOJURE / CIDER CONFIGURATION
-
-;; selection of packages for clojure work
 (defvar my-packages '(better-defaults
                       cider
                       clojure-mode
                       company
+                      gnugo
+                      helm-ag
                       highlight-symbol
                       magit
                       markdown-mode
@@ -39,6 +37,9 @@
 (dolist (p my-packages)
   (unless (package-installed-p p)
     (package-install p)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; CLOJURE / CIDER CONFIGURATION
 
 ;; paredit configuration
 (add-hook 'clojure-mode-hook #'paredit-mode)
@@ -65,6 +66,7 @@
 
 ;; pretty printing (via fipp, the default)
 (setq cider-repl-use-pretty-printing 't)
+(setq cider-pprint-fn 'fipp)
 
 ;; vertical alignment
 (setq clojure-align-forms-automatically 't)
@@ -143,6 +145,12 @@
                                 :nick "gonewest818")))
 
 
+;; GnuGo newbie setup
+(setq gnugo-option-history (list "--komi 5.5 --boardsize 13"))
+(setq gnugo-xpms 'gnugo-imgen-create-xpms)
+(add-hook 'gnugo-start-game-hook 'gnugo-image-display-mode)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Zenburn theme customization
 ;; refer to theme source code [http://bit.ly/2tI2uGW]
@@ -205,8 +213,9 @@
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
 
-;; my favorite font
+;; favorite font
 (set-default-font "Inconsolata-12")
+;;(set-default-font "Iosevka-12")
 
 ;; Every time a window is started, make sure it get maximized
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -239,6 +248,5 @@
 (setq company-minimum-prefix-length 2)
 (define-key company-active-map (kbd "<tab>")   'company-complete-common-or-cycle)
 (define-key company-active-map (kbd "S-<tab>") 'company-select-previous)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
