@@ -114,7 +114,7 @@
                      "-o" "page-bottom=32"
                      "-o" "page-left=32"
                      "-o" "page-right=32"))
-(setq lpr-page-header-switches '("-l" "80") ; lines per page
+(setq lpr-page-header-switches '("-l" "80")) ; lines per page
 
 ;; org-mode export to markdown 
 (eval-after-load "org"
