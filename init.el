@@ -8,8 +8,8 @@
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;; marmalade repo
-(add-to-list 'package-archives          ; marmalade
-             '("marmalade" . "https://marmalade-repo.org/packages/") t)
+;;(add-to-list 'package-archives          ; marmalade
+;;             '("marmalade" . "https://marmalade-repo.org/packages/") t)
 
 ;; manual initialization, see Stack Overflow [http://bit.ly/2tu5N8s] 
 (setq package-enable-at-startup nil)
@@ -32,6 +32,7 @@
                       paredit
                       projectile
                       rainbow-delimiters
+                      virtualenvwrapper
                       zenburn-theme))
 
 (dolist (p my-packages)
@@ -96,11 +97,21 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Other packages, not related to clojure development
 
-;; adjust exec-path
-;; necessary because OSX window system launch doesn't use your shell config
-;; also make sure PATH also matches, for eshell
+;; adjusting the exec-path is necessary because OSX desktop launch
+;; doesn't happen in a shell. While we're at it, we can also make sure
+;; PATH is setup properly in eshell
 (add-to-list 'exec-path "/usr/local/bin")
 (setenv "PATH" (mapconcat 'identity exec-path ":"))
+
+;; also configure virtualenvwrapper in eshell
+(require 'virtualenvwrapper)
+(venv-initialize-eshell)
+(setq venv-location "~/python-venv/")
+(setq eshell-prompt-function
+      (lambda nil
+        (concat (if venv-current-name
+                    (concat "(" venv-current-name ") "))
+                (eshell/pwd) " $ ")))
 
 ;; Print settings
 ;; When changing the font size you also need to adjust the pagination
@@ -122,7 +133,7 @@
 
 ;; ERC mode channel and server configuration
 
-(load "~/.emacs.d/.erc-auth")
+(load "~/.emacs.d/.erc-auth") ; <== (setq my-freenode-pass "...")
 
 (setq erc-nickserv-passwords
       `((freenode    (("gonewest"    . ,my-freenode-pass)
@@ -157,7 +168,6 @@
 (global-set-key "\C-ceq" (lambda () (interactive)
                            (erc :server "irc.quakenet.org" :port "6667"
                                 :nick "gonewest818")))
-
 
 ;; GnuGo newbie setup
 (setq gnugo-option-history (list "--komi 5.5 --boardsize 13"))
@@ -231,8 +241,11 @@
 (set-default-font "Inconsolata-12")
 ;;(set-default-font "Iosevka-12")
 
-;; Every time a window is started, make sure it get maximized
+;; Every time a frame is started, make sure it get maximized
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+;; winner mode allows layout undo [C-c left] & redo [C-c right]
+(winner-mode t)
 
 ;; customize the visible bell to flash only the mode line
 (setq visible-bell nil)
@@ -264,3 +277,17 @@
 (define-key company-active-map (kbd "S-<tab>") 'company-select-previous)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (virtualenvwrapper zenburn-theme rainbow-delimiters projectile paredit markdown-mode magit highlight-symbol helm-ag gnugo company cider better-defaults))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
