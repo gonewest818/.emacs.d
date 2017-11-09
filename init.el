@@ -113,6 +113,9 @@
                     (concat "(" venv-current-name ") "))
                 (eshell/pwd) " $ ")))
 
+;; term handling for AWS cli
+(setq eshell-visual-options '(("aws" "help")))
+
 ;; Print settings
 ;; When changing the font size you also need to adjust the pagination
 ;; as follows:
