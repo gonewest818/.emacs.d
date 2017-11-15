@@ -1,6 +1,8 @@
 .erc-auth
+adafruit-wisdom*
 ido.last
 network-security.data
+.cask/
 auto-save-list/
 backups/
 elpa/

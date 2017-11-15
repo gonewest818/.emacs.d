@@ -4,12 +4,29 @@
 ;; PACKAGE MANAGEMENT
 
 ;; set up package archives
-(add-to-list 'package-archives          ; melpa stable
+(add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
-;; marmalade repo
-;;(add-to-list 'package-archives          ; marmalade
-;;             '("marmalade" . "https://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa"        . "https://melpa.org/packages/") t)
+
+;; my list of packages stating preferred repo
+(setq package-pinned-packages
+      '((adafruit-wisdom    . "melpa")
+        (better-defaults    . "melpa-stable")
+        (cider              . "melpa-stable")
+        (clojure-mode       . "melpa-stable")
+        (company            . "melpa-stable")
+        (gnugo              . "melpa-stable")
+        (helm-ag            . "melpa-stable")
+        (highlight-symbol   . "melpa-stable")
+        (magit              . "melpa-stable")
+        (markdown-mode      . "melpa-stable")
+        (paredit            . "melpa-stable")
+        (projectile         . "melpa-stable")
+        (rainbow-delimiters . "melpa-stable")
+        (virtualenvwrapper  . "melpa-stable")
+        (zenburn-theme      . "melpa-stable")))
 
 ;; manual initialization, see Stack Overflow [http://bit.ly/2tu5N8s] 
 (setq package-enable-at-startup nil)
@@ -20,22 +37,7 @@
 (when (not package-archive-contents)
     (package-refresh-contents))
 
-(defvar my-packages '(better-defaults
-                      cider
-                      clojure-mode
-                      company
-                      gnugo
-                      helm-ag
-                      highlight-symbol
-                      magit
-                      markdown-mode
-                      paredit
-                      projectile
-                      rainbow-delimiters
-                      virtualenvwrapper
-                      zenburn-theme))
-
-(dolist (p my-packages)
+(dolist (p (mapcar 'car package-pinned-packages))
   (unless (package-installed-p p)
     (package-install p)))
 
@@ -274,23 +276,11 @@
 (global-set-key (kbd "C-<tab>") 'other-window)
 (global-set-key (kbd "C-x g")   'magit-status)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+(global-set-key (kbd "C-c aw")  'adafruit-wisdom)
 
 (setq company-minimum-prefix-length 2)
 (define-key company-active-map (kbd "<tab>")   'company-complete-common-or-cycle)
 (define-key company-active-map (kbd "S-<tab>") 'company-select-previous)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (virtualenvwrapper zenburn-theme rainbow-delimiters projectile paredit markdown-mode magit highlight-symbol helm-ag gnugo company cider better-defaults))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
