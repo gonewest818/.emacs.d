@@ -17,7 +17,7 @@
         (cider              . "melpa-stable")
         (clojure-mode       . "melpa-stable")
         (company            . "melpa-stable")
-        (gnugo              . "melpa-stable")
+        (gnugo              . "gnu")
         (helm-ag            . "melpa-stable")
         (highlight-symbol   . "melpa-stable")
         (magit              . "melpa-stable")
