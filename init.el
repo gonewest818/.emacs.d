@@ -118,6 +118,11 @@
 ;; term handling for AWS cli
 (setq eshell-visual-options '(("aws" "help")))
 
+;; magit repositories
+(setq magit-repository-directories
+      `((,(concat (getenv "HOME") "/Documents/code") . 1)
+        (,user-emacs-directory . 2)))
+
 ;; Print settings
 ;; When changing the font size you also need to adjust the pagination
 ;; as follows:
@@ -283,4 +288,3 @@
 (define-key company-active-map (kbd "S-<tab>") 'company-select-previous)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
