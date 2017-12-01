@@ -20,6 +20,7 @@
         (gnugo              . "gnu")
         (helm-ag            . "melpa-stable")
         (highlight-symbol   . "melpa-stable")
+        (hiwin              . "melpa")
         (magit              . "melpa-stable")
         (markdown-mode      . "melpa-stable")
         (paredit            . "melpa-stable")
@@ -234,13 +235,17 @@
   (zenburn-with-color-variables
    (custom-theme-set-faces
     'zenburn
-    `(fringe ((t (:foreground ,zenburn-fg :background ,zenburn-bg))))
+    `(fringe ((t (:foreground ,zenburn-fg :background ,zenburn-bg-05))))
     `(cider-fringe-good-face ((t (:foreground ,zenburn-green+1))))
     )))
 
 ;; Set theme
 (load-theme 'zenburn t)
 (nokamoto-customize-zenburn)
+
+;; Hiwin mode darkens all but active pane
+(hiwin-activate)
+(set-face-background 'hiwin-face "#383838")
 
 (setq inhibit-startup-screen t)
 
@@ -288,3 +293,4 @@
 (define-key company-active-map (kbd "S-<tab>") 'company-select-previous)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
