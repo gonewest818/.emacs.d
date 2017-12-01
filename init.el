@@ -247,6 +247,9 @@
 (hiwin-activate)
 (set-face-background 'hiwin-face "#383838")
 
+;; highlight the current line
+(global-hl-line-mode)
+
 (setq inhibit-startup-screen t)
 
 ;; UTF-8 as default encoding
