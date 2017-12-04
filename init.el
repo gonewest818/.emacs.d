@@ -18,11 +18,12 @@
         (clojure-mode       . "melpa-stable")
         (company            . "melpa-stable")
         (gnugo              . "gnu")
+        (header2            . "melpa")
         (helm-ag            . "melpa-stable")
         (highlight-symbol   . "melpa-stable")
-        (hiwin              . "melpa")
         (magit              . "melpa-stable")
         (markdown-mode      . "melpa-stable")
+        (package-lint       . "melpa-stable")
         (paredit            . "melpa-stable")
         (projectile         . "melpa-stable")
         (rainbow-delimiters . "melpa-stable")
@@ -235,17 +236,13 @@
   (zenburn-with-color-variables
    (custom-theme-set-faces
     'zenburn
-    `(fringe ((t (:foreground ,zenburn-fg :background ,zenburn-bg-05))))
+    `(fringe ((t (:foreground ,zenburn-fg :background ,zenburn-bg))))
     `(cider-fringe-good-face ((t (:foreground ,zenburn-green+1))))
     )))
 
 ;; Set theme
 (load-theme 'zenburn t)
 (nokamoto-customize-zenburn)
-
-;; Hiwin mode darkens all but active pane
-(hiwin-activate)
-(set-face-background 'hiwin-face "#383838")
 
 ;; highlight the current line
 (global-hl-line-mode)
@@ -285,8 +282,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; KEYBOARD BINDING
 
+(defun other-window-rev ()
+  "other-window with reversed direction for keybinding"
+  (interactive)
+  (other-window -1))
+
 (global-set-key [f9]            'cider-jack-in)
 (global-set-key (kbd "C-<tab>") 'other-window)
+(global-set-key (kbd "C-S-<tab>") 'other-window-rev)
 (global-set-key (kbd "C-x g")   'magit-status)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (global-set-key (kbd "C-c aw")  'adafruit-wisdom)
