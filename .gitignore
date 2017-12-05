@@ -5,6 +5,7 @@ network-security.data
 .cask/
 auto-save-list/
 backups/
+dev/
 elpa/
 eshell/
 url/

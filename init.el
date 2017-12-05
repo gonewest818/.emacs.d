@@ -44,6 +44,16 @@
     (package-install p)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; EMACS PACKAGES IN DEVELOPMENT
+
+;; Working on:  https://github.com/gonewest818/dimmer.el
+(let ((dimmer-path (concat user-emacs-directory "dev/dimmer.el")))
+  (if (file-directory-p dimmer-path)
+      (progn (add-to-list 'load-path dimmer-path)
+             (require 'dimmer)
+             (dimmer-activate))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CLOJURE / CIDER CONFIGURATION
 
 ;; paredit configuration
@@ -299,4 +309,3 @@
 (define-key company-active-map (kbd "S-<tab>") 'company-select-previous)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
