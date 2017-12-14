@@ -154,13 +154,14 @@
   '(require 'ox-md nil t))
 
 ;; ERC mode channel and server configuration
-
-(load "~/.emacs.d/.erc-auth") ; <== (setq my-freenode-pass "...")
-
-(setq erc-nickserv-passwords
-      `((freenode    (("gonewest"    . ,my-freenode-pass)
-                      ("gonewest818" . ,my-freenode-pass)))
-        (QuakeNet    (("gonewest818" . ,my-quakenet-pass)))))
+(let ((ercpass "~/.emacs.d/.erc-auth")) ; <== (setq my-freenode-pass "...")
+  (if (file-readable-p ercpass)
+      (progn
+        (load ercpass)
+        (setq erc-nickserv-passwords
+              `((freenode    (("gonewest"    . ,my-freenode-pass)
+                              ("gonewest818" . ,my-freenode-pass)))
+                (QuakeNet    (("gonewest818" . ,my-quakenet-pass))))))))
 
 (setq erc-autojoin-channels-alist '(("freenode" "#clojure"
                                                 "#clojurescript"
@@ -254,17 +255,21 @@
 (load-theme 'zenburn t)
 (nokamoto-customize-zenburn)
 
+(setq inhibit-startup-screen t)
+
 ;; highlight the current line
 (global-hl-line-mode)
 
-(setq inhibit-startup-screen t)
+;; clock in the modeline
+(setq display-time-format "%l:%M%#p") ; e.g. 4:48pm
+(setq display-time-default-load-average nil)
+(display-time-mode)
 
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
 
 ;; favorite font
 (set-default-font "Inconsolata-12")
-;;(set-default-font "Iosevka-12")
 
 ;; Every time a frame is started, make sure it get maximized
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -297,12 +302,12 @@
   (interactive)
   (other-window -1))
 
-(global-set-key [f9]            'cider-jack-in)
-(global-set-key (kbd "C-<tab>") 'other-window)
+(global-set-key [f9]              'cider-jack-in)
+(global-set-key (kbd "C-<tab>")   'other-window)
 (global-set-key (kbd "C-S-<tab>") 'other-window-rev)
-(global-set-key (kbd "C-x g")   'magit-status)
-(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
-(global-set-key (kbd "C-c aw")  'adafruit-wisdom)
+(global-set-key (kbd "C-x g")     'magit-status)
+(global-set-key (kbd "C-x M-g")   'magit-dispatch-popup)
+(global-set-key (kbd "C-c aw")    'adafruit-wisdom)
 
 (setq company-minimum-prefix-length 2)
 (define-key company-active-map (kbd "<tab>")   'company-complete-common-or-cycle)
