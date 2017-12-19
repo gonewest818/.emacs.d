@@ -17,6 +17,7 @@
         (cider              . "melpa-stable")
         (clojure-mode       . "melpa-stable")
         (company            . "melpa-stable")
+        (docker             . "melpa-stable")
         (gnugo              . "gnu")
         (header2            . "melpa")
         (helm-ag            . "melpa-stable")
@@ -27,6 +28,7 @@
         (paredit            . "melpa-stable")
         (projectile         . "melpa-stable")
         (rainbow-delimiters . "melpa-stable")
+        (smart-mode-line    . "melpa-stable")
         (virtualenvwrapper  . "melpa-stable")
         (zenburn-theme      . "melpa-stable")))
 
@@ -192,6 +194,10 @@
                            (erc :server "irc.quakenet.org" :port "6667"
                                 :nick "gonewest818")))
 
+;; docker
+(require 'docker)
+(docker-global-mode)
+
 ;; GnuGo newbie setup
 (setq gnugo-option-history (list "--komi 5.5 --boardsize 13"))
 (setq gnugo-xpms 'gnugo-imgen-create-xpms)
@@ -256,6 +262,12 @@
 (nokamoto-customize-zenburn)
 
 (setq inhibit-startup-screen t)
+
+;; mode line
+(require 'smart-mode-line)
+(line-number-mode t)
+(column-number-mode t)
+(sml/setup)
 
 ;; highlight the current line
 (global-hl-line-mode)
