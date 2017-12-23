@@ -53,6 +53,7 @@
   (if (file-directory-p dimmer-path)
       (progn (add-to-list 'load-path dimmer-path)
              (require 'dimmer)
+             (setq dimmer-percent 0.33)
              (dimmer-activate))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -131,6 +132,12 @@
 
 ;; term handling for AWS cli
 (setq eshell-visual-options '(("aws" "help")))
+
+;; launch one at startup
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (cd default-directory)
+            (eshell)))
 
 ;; magit repositories
 (setq magit-repository-directories
@@ -274,7 +281,7 @@
 
 ;; clock in the modeline
 (setq display-time-format "%l:%M%#p") ; e.g. 4:48pm
-(setq display-time-default-load-average nil)
+(setq display-time-default-load-average 0)
 (display-time-mode)
 
 ;; UTF-8 as default encoding
