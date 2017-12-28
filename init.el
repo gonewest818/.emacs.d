@@ -54,7 +54,7 @@
       (progn (add-to-list 'load-path dimmer-path)
              (require 'dimmer)
              (setq dimmer-percent 0.33)
-             (dimmer-activate))))
+             (dimmer-mode t))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CLOJURE / CIDER CONFIGURATION
