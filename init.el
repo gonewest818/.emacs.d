@@ -18,7 +18,7 @@
         (cider              . "melpa-stable")
         (clojure-mode       . "melpa-stable")
         (company            . "melpa-stable")
-        (dashboard          . "melpa-stable")
+        ;(dashboard          . "melpa-stable")
         (docker             . "melpa-stable")
         (gnugo              . "gnu")
         (header2            . "melpa")
@@ -63,10 +63,17 @@
   (when (file-directory-p mincal-path)
     (add-to-list 'load-path mincal-path)
     (require 'mincal)
-    (global-set-key (kbd "C-c am") 'mincal-display)
-    ;;(add-hook 'emacs-startup-hook 'mincal-display)
+    (global-set-key (kbd "C-c am") 'mincal-display)))
+
+;; Working on: https://github.com/gonewest818/emacs-dashboard
+(let ((dashboard-path (concat user-emacs-directory "dev/emacs-dashboard")))
+  (when (file-directory-p dashboard-path)
+    (add-to-list 'load-path dashboard-path)
+    (require 'dashboard)
     (setq dashboard-banner-logo-title (concat "Emacs " emacs-version " | " (current-time-string)))
     (setq dashboard-startup-banner (mincal-retrieve))
+    (setq dashboard-image-banner-max-width 350)
+    (setq dashboard-image-banner-max-height 350)
     (dashboard-setup-startup-hook)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
