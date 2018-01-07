@@ -13,10 +13,12 @@
 ;; my list of packages stating preferred repo
 (setq package-pinned-packages
       '((adafruit-wisdom    . "melpa")
+        (alert              . "melpa")
         (better-defaults    . "melpa-stable")
         (cider              . "melpa-stable")
         (clojure-mode       . "melpa-stable")
         (company            . "melpa-stable")
+        (dashboard          . "melpa-stable")
         (docker             . "melpa-stable")
         (gnugo              . "gnu")
         (header2            . "melpa")
@@ -48,13 +50,24 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; EMACS PACKAGES IN DEVELOPMENT
 
-;; Working on:  https://github.com/gonewest818/dimmer.el
+;; Working on: https://github.com/gonewest818/dimmer.el
 (let ((dimmer-path (concat user-emacs-directory "dev/dimmer.el")))
-  (if (file-directory-p dimmer-path)
-      (progn (add-to-list 'load-path dimmer-path)
-             (require 'dimmer)
-             (setq dimmer-percent 0.33)
-             (dimmer-mode t))))
+  (when (file-directory-p dimmer-path)
+    (add-to-list 'load-path dimmer-path)
+    (require 'dimmer)
+    (setq dimmer-percent 0.33)
+    (dimmer-mode t)))
+
+;; Working on: miniature-calendar splash screen
+(let ((mincal-path (concat user-emacs-directory "dev/mincal.el")))
+  (when (file-directory-p mincal-path)
+    (add-to-list 'load-path mincal-path)
+    (require 'mincal)
+    (global-set-key (kbd "C-c am") 'mincal-display)
+    ;;(add-hook 'emacs-startup-hook 'mincal-display)
+    (setq dashboard-banner-logo-title (concat "Emacs " emacs-version " | " (current-time-string)))
+    (setq dashboard-startup-banner (mincal-retrieve))
+    (dashboard-setup-startup-hook)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CLOJURE / CIDER CONFIGURATION
@@ -71,7 +84,10 @@
 (add-hook 'cider-mode-hook #'company-mode)
 
 ;; Replace return key with newline-and-indent when in cider mode.
-(add-hook 'cider-mode-hook '(lambda () (local-set-key (kbd "RET") 'newline-and-indent)))
+(add-hook 'cider-mode-hook
+          '(lambda ()
+             (local-set-key (kbd "RET") 'newline-and-indent)
+             (setq cider-connection-message-fn #'adafruit-wisdom-select)))
 
 ;; rainbow delimiters
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
@@ -270,14 +286,14 @@
 
 (setq inhibit-startup-screen t)
 
+;; highlight the current line
+(global-hl-line-mode)
+
 ;; mode line
 (require 'smart-mode-line)
 (line-number-mode t)
 (column-number-mode t)
 (sml/setup)
-
-;; highlight the current line
-(global-hl-line-mode)
 
 ;; clock in the modeline
 (setq display-time-format "%l:%M%#p") ; e.g. 4:48pm
@@ -295,6 +311,10 @@
 
 ;; winner mode allows layout undo [C-c left] & redo [C-c right]
 (winner-mode t)
+
+;; alerts
+(when (string-equal system-type "darwin")
+  (setq alert-default-style 'notifier))
 
 ;; customize the visible bell to flash only the mode line
 (setq visible-bell nil)

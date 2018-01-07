@@ -2,6 +2,7 @@
 adafruit-wisdom*
 ido.last
 network-security.data
+recentf
 .cask/
 auto-save-list/
 backups/
