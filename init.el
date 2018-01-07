@@ -74,6 +74,7 @@
     (setq dashboard-startup-banner (mincal-retrieve))
     (setq dashboard-image-banner-max-width 350)
     (setq dashboard-image-banner-max-height 350)
+    (setq dashboard-items '((recents . 5) (projects . 5) (bookmarks . 5)))
     (dashboard-setup-startup-hook)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -318,6 +319,9 @@
 
 ;; winner mode allows layout undo [C-c left] & redo [C-c right]
 (winner-mode t)
+
+;; navigation in dashboard
+(projectile-global-mode)
 
 ;; alerts
 (when (string-equal system-type "darwin")
