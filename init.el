@@ -55,7 +55,7 @@
   (when (file-directory-p dimmer-path)
     (add-to-list 'load-path dimmer-path)
     (require 'dimmer)
-    (setq dimmer-percent 0.33)
+    (setq dimmer-fraction 0.33)
     (dimmer-mode t)))
 
 ;; Working on: miniature-calendar splash screen
@@ -94,8 +94,16 @@
 ;; Replace return key with newline-and-indent when in cider mode.
 (add-hook 'cider-mode-hook
           '(lambda ()
-             (local-set-key (kbd "RET") 'newline-and-indent)
-             (setq cider-connection-message-fn #'adafruit-wisdom-select)))
+             (local-set-key (kbd "RET") #'newline-and-indent)))
+
+;; Replace return key with newline-and-indent in REPL
+(add-hook 'cider-repl-mode-hook
+          '(lambda ()
+             (local-set-key (kbd "RET") #'cider-repl-return)
+             (local-set-key (kbd "C-<return>") #'cider-repl-newline-and-indent)))
+
+;; Print adafruit-wisdom after repl connect
+(setq cider-connection-message-fn #'adafruit-wisdom-select)
 
 ;; rainbow delimiters
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
