@@ -296,6 +296,19 @@
     `(cider-fringe-good-face ((t (:foreground ,zenburn-green+1))))
     )))
 
+;; configure the mode line
+(require 'smart-mode-line)
+(line-number-mode t)
+(column-number-mode t)
+(setq display-time-format "%l:%M%#p") ; e.g. 4:48pm
+(setq display-time-default-load-average 0)
+(display-time-mode)
+(setq sml/shorten-directory t)
+(setq sml/shorten-modes t)
+(setq sml/name-width 40)
+(setq sml/mode-width 'full)
+(add-hook 'after-init-hook 'sml/setup)
+
 ;; Set theme
 (load-theme 'zenburn t)
 (nokamoto-customize-zenburn)
@@ -304,17 +317,6 @@
 
 ;; highlight the current line
 (global-hl-line-mode)
-
-;; mode line
-(require 'smart-mode-line)
-(line-number-mode t)
-(column-number-mode t)
-(sml/setup)
-
-;; clock in the modeline
-(setq display-time-format "%l:%M%#p") ; e.g. 4:48pm
-(setq display-time-default-load-average 0)
-(display-time-mode)
 
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
