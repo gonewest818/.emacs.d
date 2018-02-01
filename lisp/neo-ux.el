@@ -27,7 +27,7 @@
 (use-package zenburn-theme
   :ensure t
   :pin melpa-stable
-  :config
+  :init
   (load-theme 'zenburn t)
   (zenburn-with-color-variables
     (custom-theme-set-faces
