@@ -51,10 +51,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ELISP DEVELOPMENT
 
-(use-package header2
-  :ensure t
-  :commands (make-header))
-
 (use-package package-lint
   :ensure t
   :pin melpa-stable

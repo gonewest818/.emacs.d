@@ -8,16 +8,14 @@
 
 (use-package gnugo
   :ensure t
-  :pin melpa-stable
-  :commands (gnugo
-             gnugo-image-display-mode
-             gnugo-imgen-create-xmps)
-  :hook (gnugo-start-game . gnugo-image-display-mode)
+  :pin gnu
+  :bind ("C-c ag" . gnugo)
   :config
   (setq gnugo-option-history (list "--komi 5.5 --boardsize 13"))
-  (setq gnugo-xmps #'gnugo-imgen-create-xmps))
+  (setq gnugo-xpms #'gnugo-imgen-create-xpms)
+  (add-hook 'gnugo-start-game-hook #'gnugo-image-display-mode))
 
 (use-package 2048-game
   :ensure t
   :defer t
-  :commands (2048-game))
+  :bind ("C-c a2" . 2048-game))
