@@ -16,7 +16,8 @@
 
 ;; Packages with preferred repo
 (setq package-pinned-packages
-      '( ;  (helm-ag        . "melpa-stable")
+      '((bind-key           . "melpa")
+        (diminish           . "melpa")
         (use-package        . "melpa")))
 
 ;; Refresh package archive contents only if it's empty.
