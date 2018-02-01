@@ -44,7 +44,7 @@
 ;; Setting the `load-path` allows the rest of my configuration to be
 ;; broken into separate modules.
 
-(add-to-list 'load-path (concat user-emacs-directory "custom"))
+(add-to-list 'load-path (concat user-emacs-directory "lisp"))
 
 ;; Adjusting the `exec-path` is necessary because OSX desktop launch
 ;; doesn't happen in a shell and therefore doesn't get the path
