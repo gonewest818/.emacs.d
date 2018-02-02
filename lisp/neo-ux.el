@@ -37,6 +37,12 @@
      ;; make these easier to see
      `(cider-fringe-good-face ((t (:foreground ,zenburn-green+1)))))))
 
+(use-package which-key
+  :ensure t
+  :pin melpa-stable
+  :diminish ""
+  :config
+  (which-key-mode))
 
 (setq inhibit-startup-screen t)
 
