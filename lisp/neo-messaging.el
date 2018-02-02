@@ -18,21 +18,34 @@
         (progn
           (load ercpass)
           (setq erc-nickserv-passwords
-                `((freenode    (("gonewest"    . ,my-freenode-pass)
-                                ("gonewest818" . ,my-freenode-pass)))
-                  (QuakeNet    (("gonewest818" . ,my-quakenet-pass))))))))
+                `((freenode (("gonewest"    . ,my-freenode-pass)
+                             ("gonewest818" . ,my-freenode-pass)))
+                  (QuakeNet (("gonewest818" . ,my-quakenet-pass))))))))
 
   ;; Convenience key bindings
   (global-set-key "\C-cef" (lambda ()
                              (interactive)
-                             (erc :server "irc.freenode.net" :port "6667"
-                                  :nick "gonewest818")))
+                             (erc
+                              :server   "irc.freenode.net"
+                              :port     "6667"
+                              :nick     "gonewest818")))
   (global-set-key "\C-ceq" (lambda ()
                              (interactive)
-                             (erc :server "irc.quakenet.org" :port "6667"
-                                  :nick "gonewest818")))
+                             (erc
+                              :server   "irc.quakenet.org"
+                              :port     "6667"
+                              :nick     "gonewest818")))
+  (global-set-key "\C-ceg" (lambda ()
+                             (interactive)
+                             (erc-tls
+                              :server   "irc.gitter.im"
+                              :port     "6697"
+                              :nick     "gonewest818"
+                              :password my-gitter-pass)))
 
   :config
+  (require 'tls)
+  
   ;; Automate nickserv logins
   (push 'services erc-modules)
   (erc-update-modules)
