@@ -54,3 +54,26 @@
   (setq projectile-completion-system 'ivy)
   ;;(projectile-global-mode 1)
   )
+
+(use-package ibuffer-projectile
+  :ensure t
+  :commands (ibuffer-projectile-set-filter-groups
+             ibuffer-projectile-generate-filter-groups)
+  :init
+  (setq ibuffer-expert t)
+  (setq ibuffer-show-empty-filter-groups nil)
+
+  ;; Works similarly to the ibuffer-projectile default, but we have a
+  ;; few more custom filter groups we want to concatenate to the list.
+  (defun neo-set-filter-groups ()
+    (interactive)
+    (setq ibuffer-filter-groups
+          (nconc (ibuffer-projectile-generate-filter-groups)
+                 '(("irc" (mode . erc-mode)))))
+    (message "ibuffer: filter groups set")
+    (let ((ibuf (get-buffer "*Ibuffer*")))
+      (when ibuf
+        (with-current-buffer ibuf
+          (pop-to-buffer ibuf)
+          (ibuffer-update nil t)))))
+  (add-hook 'ibuffer-hook #'neo-set-filter-groups))
