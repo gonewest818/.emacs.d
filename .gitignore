@@ -11,4 +11,5 @@ backups/
 dev/
 elpa/
 eshell/
+request/
 url/

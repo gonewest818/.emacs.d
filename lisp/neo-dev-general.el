@@ -1,11 +1,21 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GENERAL DEVELOPMENT
 
-(use-package docker
-  :ensure t
-  :pin melpa-stable
-  :diminish ""
-  :config (docker-global-mode))
+(if (setq nokamoto-docker-use-dev t)
+    (use-package docker
+      :load-path "~/.emacs.d/dev/docker.el/"
+      :diminish "D*"
+      :config
+      (docker-global-mode)
+      (use-package request
+        :ensure t
+        :defer t
+        :commands (request)))
+  (use-package docker
+    :ensure t
+    :pin melpa-stable
+    :diminish ""
+    :config (docker-global-mode)))
 
 (use-package magit
   :ensure t
