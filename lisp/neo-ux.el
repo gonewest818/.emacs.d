@@ -1,6 +1,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; USER INTERACTION AND DESIGN
 
+(if (setq nokamoto-dimmer-use-dev t)    ; set true to use dev version
+    (use-package dimmer
+      :load-path "~/.emacs.d/dev/dimmer.el/"
+      :config
+      (setq dimmer-fraction 0.33)
+      (dimmer-mode t))
+  (use-package dimmer
+    :ensure t
+    :config
+    (setq dimmer-fraction 0.33)
+    (dimmer-mode t)))
+
 (use-package highlight-symbol
   :ensure t
   :pin melpa-stable
