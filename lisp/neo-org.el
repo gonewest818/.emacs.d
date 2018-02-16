@@ -1,7 +1,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ORG-MODE
 
-;; org-mode export to markdown 
-(eval-after-load "org"
-  '(require 'ox-md nil t))
+(use-package org
+  :mode "\\.org$"
+  :bind (("C-c l" . org-store-link)
+         ("C-c a" . org-agenda))
+  :commands (orgtbl-mode))
 
+(use-package ox-md
+  :after (org))
