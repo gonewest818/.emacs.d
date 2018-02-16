@@ -45,7 +45,9 @@
 
   :config
   (require 'tls)
-  
+
+  (setq erc-join-buffer 'bury) ; useful especially on reconnect
+
   ;; Automate nickserv logins
   (push 'services erc-modules)
   (erc-update-modules)
