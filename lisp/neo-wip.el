@@ -9,5 +9,5 @@
     (use-package mincal
       :pin manual
       :commands (mincal-display mincal-retrieve)
-      :bind ("C-c am" . mincal-display))))
+      :bind ("C-c qm" . mincal-display))))
 
