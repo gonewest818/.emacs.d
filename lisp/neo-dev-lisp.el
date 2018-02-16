@@ -19,7 +19,7 @@
 
 (use-package cider
   :ensure t
-  :pin melpa-stable
+  ;:pin melpa-stable
   :commands (cider cider-connect cider-jack-in)
   :hook (clojure-mode . cider-mode)
   :bind (("<f9>"       . cider-jack-in)
@@ -29,6 +29,8 @@
          ("<return>"   . cider-repl-return)
          ("C-<return>" . cider-repl-newline-and-indent))
   :config
+  (setq cider-default-repl-command "lein")
+
   ;; use adafruit for connection messages
   (setq cider-connection-message-fn #'adafruit-wisdom-select)
 
