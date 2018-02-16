@@ -52,8 +52,7 @@
   :bind-keymap (("C-c p" . projectile-command-map))
   :config
   (setq projectile-completion-system 'ivy)
-  ;;(projectile-global-mode 1)
-  )
+  (projectile-global-mode 1))
 
 (use-package ibuffer-projectile
   :ensure t
