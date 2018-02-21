@@ -18,23 +18,25 @@
     (context 2)))
 
 (use-package cider
-  :ensure t
-  ;:pin melpa-stable
-  :commands (cider cider-connect cider-jack-in)
+  ;; Uncomment this section for packaged version
+  ;; :ensure t
+  ;; :pin melpa-stable
+  ;; Uncomment for local version
+  :load-path "~/Documents/code/cider"
+  ;; Common configuration below
+  :commands (cider)
   :hook (clojure-mode . cider-mode)
-  :bind (("<f9>"       . cider-jack-in)
+  :bind (("C-c M-j"    . cider-jack-in)  ; unnecessary if cider-mode hook handles?
+         ("C-c M-c"    . cider-connect)  ; unnecessary if cider-mode hook handles?
+         ("C-c M-s"    . cider-selector) ; unnecessary if cider-mode hook handles?
          :map cider-mode-map
          ("<return>"   . newline-and-indent)
          :map cider-repl-mode-map
          ("<return>"   . cider-repl-return)
          ("C-<return>" . cider-repl-newline-and-indent))
   :config
-  (setq cider-default-repl-command "lein")
-
-  ;; use adafruit for connection messages
   (setq cider-connection-message-fn #'adafruit-wisdom-select)
-
-  ;; pprint setup
+  (setq cider-default-repl-command "lein")
   (setq cider-repl-use-pretty-printing 't)
   (setq cider-pprint-fn 'fipp))
 
