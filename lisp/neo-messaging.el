@@ -25,9 +25,9 @@
   ;; Convenience key bindings
   (global-set-key "\C-cef" (lambda ()
                              (interactive)
-                             (erc
+                             (erc-tls
                               :server   "irc.freenode.net"
-                              :port     "6667"
+                              :port     "6697"
                               :nick     "gonewest818")))
   (global-set-key "\C-ceq" (lambda ()
                              (interactive)
@@ -35,6 +35,13 @@
                               :server   "irc.quakenet.org"
                               :port     "6667"
                               :nick     "gonewest818")))
+  (global-set-key "\C-ces" (lambda ()
+                             (interactive)
+                             (erc-tls
+                              :server   "clojurians.irc.slack.com"
+                              :port     "6697"
+                              :nick     "gonewest818"
+                              :password my-slack-pass)))
   (global-set-key "\C-ceg" (lambda ()
                              (interactive)
                              (erc-tls
@@ -46,6 +53,8 @@
   :config
   (require 'tls)
 
+  (setq erc-lurker-hide-list '("JOIN" "PART" "QUIT") ; or try erc-hide-list
+        erc-lurker-threshold-time 3600)
   (setq erc-join-buffer 'bury) ; useful especially on reconnect
 
   ;; Automate nickserv logins
@@ -54,9 +63,9 @@
   (setq erc-prompt-for-nickserv-password nil)
 
   ;; Automate joining channels at startup
-  (setq erc-autojoin-channels-alist '(("freenode" "#clojure"
+  (setq erc-autojoin-channels-alist '(("freenode" "#docker"
+                                                  "#clojure"
                                                   "#clojurescript"
-                                                  "#clojure-beginners"
                                                   "#clojure-emacs"
                                                   "#emacs"
                                                   "#datomic"
