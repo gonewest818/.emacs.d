@@ -6,11 +6,13 @@
       :load-path "~/.emacs.d/dev/dimmer.el/"
       :config
       (setq dimmer-fraction 0.33)
+      (setq dimmer-exclusion-regexp "^\*helm.*\\|^ \*Minibuf-.*\\|^ \*Echo.*")
       (dimmer-mode t))
   (use-package dimmer
     :ensure t
     :config
     (setq dimmer-fraction 0.33)
+    (setq dimmer-exclusion-regexp "^\*helm.*\\|^ \*Minibuf-.*\\|^ \*Echo.*")
     (dimmer-mode t)))
 
 (use-package highlight-symbol
@@ -47,7 +49,16 @@
      ;; prefer the fringe background to be same as bg
      `(fringe ((t (:foreground ,zenburn-fg :background ,zenburn-bg))))
      ;; make these easier to see
-     `(cider-fringe-good-face ((t (:foreground ,zenburn-green+1)))))))
+     `(cider-fringe-good-face ((t (:foreground ,zenburn-green+1))))
+     ;; modeline customizations
+     `(mode-line
+       ((,class (:box (:line-width 1 :color ,zenburn-bg-2)
+                      :foreground ,zenburn-green+1
+                      :background ,zenburn-bg-1))))
+     `(mode-line-inactive
+       ((,class (:box (:line-width 1 :color ,zenburn-bg-1)
+                      :foreground ,zenburn-green-1
+                      :background ,zenburn-bg-05)))))))
 
 (use-package which-key
   :ensure t
