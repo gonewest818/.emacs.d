@@ -2,10 +2,23 @@
 ;; ORG-MODE
 
 (use-package org
-  :mode "\\.org$"
+  :mode ("\\.org$" . org-mode)
   :bind (("C-c l" . org-store-link)
          ("C-c a" . org-agenda))
-  :commands (orgtbl-mode))
+  :commands (org
+             org-capture
+             org-mode
+             orgtbl-mode
+             ;update-org-hours
+             ;my-term-agenda
+             ;dired-notes
+             ;jump-to-org-agenda
+             )
+  :init
+  (setq org-directory "~/org")
+  (setq org-mobile-inbox-for-pull "~/org/flagged.org")
+  (setq org-mobile-directory "~/Dropbox (MSG Ventures)/Apps/MobileOrg"))
 
 (use-package ox-md
   :after (org))
+
