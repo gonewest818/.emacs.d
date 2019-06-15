@@ -35,13 +35,6 @@
                               :server   "irc.quakenet.org"
                               :port     "6667"
                               :nick     "gonewest818")))
-  (global-set-key "\C-ces" (lambda ()
-                             (interactive)
-                             (erc-tls
-                              :server   "clojurians.irc.slack.com"
-                              :port     "6697"
-                              :nick     "gonewest818"
-                              :password my-slack-pass)))
   (global-set-key "\C-ceg" (lambda ()
                              (interactive)
                              (erc-tls
@@ -76,3 +69,27 @@
   (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
                                   "324" "329" "332" "333" "353" "477"))
   (setq erc-track-exclude-server-buffer t))
+
+(use-package slack
+  :ensure t
+  :commands (slack-start)
+  :bind (("C-x j" . slack-select-rooms)
+         :map slack-mode-map
+         ("C-c C-d" . slack-message-delete)
+         ("C-c C-e" . slack-message-edit)
+         ("C-c C-k" . slack-channel-leave)
+         ("@" . slack-message-embed-mention))
+  :init
+  (setq slack-buffer-emojify t)
+  (setq slack-prefer-current-team t)
+  (setq slack-display-team-name nil) ; ???
+  (setq slack-buffer-function #'switch-to-buffer) ; ???
+  (setq slack-completing-read-function #'ivy-completing-read)
+  :config
+  (slack-register-team
+   :name "novaalumn"
+   :default t
+   :client-id my-slack-novaalumn-id
+   :token my-slack-novaalumn-token
+   :subscribed-channels '(novaops general)
+   :full-and-display-names t))
