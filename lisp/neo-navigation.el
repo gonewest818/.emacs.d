@@ -52,6 +52,7 @@
   :bind-keymap (("C-c p" . projectile-command-map))
   :config
   (setq projectile-completion-system 'ivy)
+  (setq projectile-project-search-path '("~/Documents/code/"))
   (projectile-global-mode 1))
 
 (use-package ibuffer-projectile
