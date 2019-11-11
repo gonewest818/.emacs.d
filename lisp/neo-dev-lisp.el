@@ -1,10 +1,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CLOJURE DEVELOPMENT
 
+(use-package flycheck-clj-kondo
+  :ensure t
+  :pin melpa-stable)
+
 (use-package clojure-mode
   :ensure t
   :pin melpa-stable
+  :after (flycheck)
   :config
+  (require 'flycheck-clj-kondo)
   (setq clojure-align-forms-automatically t)
   (define-clojure-indent
     ;; compojure
@@ -19,10 +25,10 @@
 
 (use-package cider
   ;; Uncomment this section for packaged version
-  ;; :ensure t
-  ;; :pin melpa-stable
+  :ensure t
+  :pin melpa-stable
   ;; Uncomment for local version
-  :load-path "~/Documents/code/cider"
+  ;:load-path "~/Documents/code/cider"
   ;; Common configuration below
   :commands (cider)
   :hook (clojure-mode . cider-mode)
@@ -51,6 +57,14 @@
          (emacs-lisp-mode . paredit-mode)
          (lisp-interaction-mode . paredit-mode)
          (eval-expression-minibuffer-setup . paredit-mode)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; FENNEL-LANG DEVELOPMENT
+
+(use-package fennel-mode
+  :load-path "~/.emacs.d/dev/fennel-mode"
+  :mode "\\.fnl\\'"
+  :config)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ELISP DEVELOPMENT

@@ -4,7 +4,10 @@
 (use-package adafruit-wisdom
   :ensure t
   :commands (adafruit-wisdom adafruit-wisdom-select)
-  :bind ("C-c qw" . adafruit-wisdom))
+  :bind ("C-c qw" . adafruit-wisdom)
+  ;;:config
+  ;;(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+  )
 
 (use-package gnugo
   :ensure t

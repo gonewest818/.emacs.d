@@ -1,7 +1,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GENERAL DEVELOPMENT
 
-(if (setq nokamoto-docker-use-dev t)
+(if (setq nokamoto-docker-use-dev nil)
     (use-package docker
       :load-path "~/.emacs.d/dev/docker.el/"
       :diminish "D*"
@@ -28,6 +28,11 @@
         `((,(concat (getenv "HOME") "/Documents/code") . 1)
           (,user-emacs-directory . 2)))
   (setq magit-completing-read-function 'ivy-completing-read))
+
+(use-package flycheck
+  :ensure t
+  :pin melpa-stable
+  :init (global-flycheck-mode))
 
 (use-package markdown-mode
   :ensure t
