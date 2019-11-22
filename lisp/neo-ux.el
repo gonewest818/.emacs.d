@@ -5,21 +5,17 @@
     (use-package dimmer
       :load-path "~/.emacs.d/dev/dimmer.el/"
       :config
-      (setq dimmer-fraction 0.33)
-      (setq dimmer-exclusion-predicates
-            '(helm--alive-p
-              window-minibuffer-p))
-      (setq dimmer-exclusion-regexp-list
-            '("^\\*[h|H]elm.*\\*"
-              "^\\*Minibuf-[0-9]+\\*"
-              "^.\\*which-key\\*$"
-              "^.\\*Echo.*\\*"))
+      (setq dimmer-fraction 0.25)
+      (setq dimmer-adjustment-mode :both)
+      (dimmer-configure-which-key)
+      (dimmer-configure-helm)
       (dimmer-mode t))
   (use-package dimmer
     :ensure t
     :config
     (setq dimmer-fraction 0.33)
-    (setq dimmer-exclusion-regexp "^\*helm.*\\|^ \*Minibuf-.*\\|^ \*Echo.*")
+    (dimmer-configure-which-key)
+    (dimmer-configure-helm)
     (dimmer-mode t)))
 
 (use-package highlight-symbol
@@ -78,7 +74,7 @@
 
 (global-hl-line-mode)                   ; highlight current line
 
-(set-default-font "Inconsolata-12")
+(set-frame-font "Inconsolata-12" nil t)
 
 ;; Every time a frame is started, make sure it get maximized
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
