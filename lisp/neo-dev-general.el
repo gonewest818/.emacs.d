@@ -1,26 +1,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GENERAL DEVELOPMENT
 
-(if (setq nokamoto-docker-use-dev nil)
-    (use-package docker
-      :load-path "~/.emacs.d/dev/docker.el/"
-      :diminish "D*"
-      :config
-      (docker-global-mode)
-      (use-package request
-        :ensure t
-        :defer t
-        :commands (request)))
-  (use-package docker
-    :ensure t
-    :pin melpa-stable
-    :diminish ""
-    :config (docker-global-mode)))
+(use-package docker
+  :ensure t
+  :pin melpa
+  :diminish "d*"
+  :bind ("C-c d" . docker))
 
 (use-package magit
   :ensure t
   :pin melpa-stable
-  :after (ivy)
   :bind (("C-x g"   . magit-status)
          ("C-x M-g" . magit-dispatch-popup))
   :config
