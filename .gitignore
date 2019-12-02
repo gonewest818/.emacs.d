@@ -1,12 +1,4 @@
 .cask/
-.erc-auth
-.org-*
-adafruit-wisdom*
-ido.last
-network-security.data
-projectile.cache
-projectile-bookmarks.eld
-recentf
 auto-save-list/
 backups/
 dev/
@@ -14,4 +6,14 @@ elpa/
 emojis/
 eshell/
 request/
+transient/
 url/
+var/
+.erc-auth
+.org-*
+adafruit-wisdom*
+custom.el
+ido.last
+network-security.data
+projectile*
+recentf

@@ -39,6 +39,12 @@
 (require 'bind-key)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; CUSTOM
+
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(when (file-readable-p custom-file) (load custom-file))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PATH MANIPULATION
 
 ;; Setting the `load-path` allows the rest of my configuration to be
