@@ -52,7 +52,9 @@
   :bind-keymap (("C-c p" . projectile-command-map))
   :config
   (setq projectile-completion-system 'ivy)
-  (setq projectile-project-search-path '("~/Documents/code/"))
+  (setq projectile-sort-order 'recently-active)
+  (setq projectile-project-search-path
+        (cons "~/Documents/code/" (file-expand-wildcards "~/Documents/code/dev-*")))
   (projectile-global-mode 1))
 
 (use-package ibuffer-projectile
