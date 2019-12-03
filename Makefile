@@ -6,9 +6,9 @@ export EMACS ?= emacs
 GITIGNORE = $(shell cat .gitignore)
 
 # ...except these files need to be preserved
-PRESERVE = .erc-auth \
+PRESERVE = .erc-auth                       \
+           forge-database.sqlite           \
            dev/
-
 
 default:
 	@echo "Usage:"

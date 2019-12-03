@@ -13,6 +13,7 @@ var/
 .org-*
 adafruit-wisdom*
 custom.el
+forge-database.sqlite
 ido.last
 network-security.data
 projectile*

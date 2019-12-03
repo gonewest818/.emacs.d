@@ -9,7 +9,7 @@
 
 (use-package magit
   :ensure t
-  :pin melpa-stable
+  :pin melpa
   :bind (("C-x g"   . magit-status)
          ("C-x M-g" . magit-dispatch-popup))
   :config
@@ -17,6 +17,11 @@
         `((,(concat (getenv "HOME") "/Documents/code") . 1)
           (,user-emacs-directory . 2)))
   (setq magit-completing-read-function 'ivy-completing-read))
+
+(use-package forge
+  :ensure t
+  :pin melpa
+  :after magit)
 
 (use-package flycheck
   :ensure t
