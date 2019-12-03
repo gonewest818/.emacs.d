@@ -30,6 +30,11 @@
   ;;(ivy-mode 1)
   )
 
+(use-package swiper
+  :ensure t
+  :pin melpa-stable
+  :bind ("C-s" . swiper))
+
 (use-package counsel
   :ensure t
   :pin melpa-stable
@@ -39,11 +44,6 @@
          ("C-h v"   . counsel-describe-variable)
          ("C-c g"   . counsel-git)
          ("C-c j"   . counsel-git-grep)))
-
-(use-package swiper
-  :ensure t
-  :pin melpa-stable
-  :bind ("C-s" . swiper))
 
 (use-package projectile
   :ensure t
