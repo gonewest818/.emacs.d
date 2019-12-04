@@ -17,17 +17,11 @@
 (use-package ivy
   :ensure t
   :pin melpa-stable
-  :commands (ivy-mode
-             ivy-completing-read
-             ivy-completion-in-region
-             ivy-read)
-  :bind (("C-c C-r" . ivy-resume)
-         ("C-x b"   . ivy-switch-buffer))
   :config
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
   (setq ivy-wrap t)
-  ;;(ivy-mode 1)
+  (ivy-mode t)
   )
 
 (use-package swiper
@@ -38,12 +32,9 @@
 (use-package counsel
   :ensure t
   :pin melpa-stable
-  :bind (("M-x"     . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("C-h f"   . counsel-describe-function)
-         ("C-h v"   . counsel-describe-variable)
-         ("C-c g"   . counsel-git)
-         ("C-c j"   . counsel-git-grep)))
+  :diminish "cn"
+  :config
+  (counsel-mode t))
 
 (use-package projectile
   :ensure t
