@@ -5,9 +5,7 @@
   :ensure t
   :pin melpa-stable
   :diminish "co"
-  :hook ((cider-mode      . company-mode)
-         (cider-repl-mode . company-mode))
-  ;; try without (global-company-mode) to see what's lost
+  :hook (after-init . global-company-mode)
   :config
   (setq company-minimum-prefix-length 2)
   (bind-keys :map company-active-map
@@ -21,8 +19,7 @@
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
   (setq ivy-wrap t)
-  (ivy-mode t)
-  )
+  (ivy-mode t))
 
 (use-package swiper
   :ensure t
