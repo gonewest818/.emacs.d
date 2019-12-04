@@ -5,7 +5,7 @@
     (use-package dimmer
       :load-path "~/.emacs.d/dev/dimmer.el/"
       :config
-      (setq dimmer-fraction 0.25)
+      (setq dimmer-fraction 0.1)
       (setq dimmer-adjustment-mode :both)
       (dimmer-configure-which-key)
       (dimmer-configure-helm)
@@ -13,7 +13,8 @@
   (use-package dimmer
     :ensure t
     :config
-    (setq dimmer-fraction 0.33)
+    (setq dimmer-fraction 0.1)
+    (setq dimmer-adjustment-mode :both)
     (dimmer-configure-which-key)
     (dimmer-configure-helm)
     (dimmer-mode t)))
