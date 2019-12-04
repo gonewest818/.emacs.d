@@ -1,6 +1,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; INTERACTIVE SHELL
 
+(use-package nvm
+  :ensure t
+  :pin melpa-stable)
+
 (use-package eshell
   :bind (("C-c M-e" . eshell))
   :config
