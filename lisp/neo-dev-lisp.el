@@ -8,9 +8,8 @@
 (use-package clojure-mode
   :ensure t
   :pin melpa-stable
-  :after (flycheck)
+  :after (flycheck flycheck-clj-kondo)
   :config
-  (require 'flycheck-clj-kondo)
   (setq clojure-align-forms-automatically t)
   (define-clojure-indent
     ;; compojure
