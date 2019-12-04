@@ -16,9 +16,10 @@
 
 ;; Packages with preferred repo
 (setq package-pinned-packages
-      '((bind-key           . "melpa")
-        (diminish           . "melpa")
-        (use-package        . "melpa")))
+      '((bind-key             . "melpa")
+        (diminish             . "melpa")
+        (use-package          . "melpa")
+        (exec-path-from-shell . "melpa")))
 
 ;; Refresh package archive contents only if it's empty.
 ;; If you need to update packages, do it manually.
@@ -57,8 +58,11 @@
 ;; configured in your shell.  For my purposes I only need
 ;; /usr/local/bin. While we're at it, we can also make sure $PATH is
 ;; setup properly in the environment for `eshell`.
-(add-to-list 'exec-path "/usr/local/bin")
-(setenv "PATH" (mapconcat 'identity exec-path ":"))
+;(add-to-list 'exec-path "/usr/local/bin")
+;(setenv "PATH" (mapconcat 'identity exec-path ":"))
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CUSTOMIZATIONS
