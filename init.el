@@ -55,11 +55,7 @@
 
 ;; Adjusting the `exec-path` is necessary because OSX desktop launch
 ;; doesn't happen in a shell and therefore doesn't get the path
-;; configured in your shell.  For my purposes I only need
-;; /usr/local/bin. While we're at it, we can also make sure $PATH is
-;; setup properly in the environment for `eshell`.
-;(add-to-list 'exec-path "/usr/local/bin")
-;(setenv "PATH" (mapconcat 'identity exec-path ":"))
+;; configured in your shell.
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
