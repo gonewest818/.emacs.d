@@ -12,6 +12,7 @@ var/
 .erc-auth
 .org-*
 adafruit-wisdom*
+bookmarks
 custom.el
 forge-database.sqlite
 ido.last
