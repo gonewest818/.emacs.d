@@ -76,6 +76,9 @@
   :pin melpa-stable
   :bind ("C-=" . er/expand-region))
 
+(use-package keycast
+  :ensure t)
+
 (setq inhibit-startup-screen t)
 
 (global-hl-line-mode)                   ; highlight current line
