@@ -22,3 +22,7 @@
   :ensure t
   :defer t
   :bind ("C-c q2" . 2048-game))
+
+(use-package malyon
+  :ensure t
+  :bind ("C-c qz" . malyon))
