@@ -45,6 +45,9 @@
   (setq cider-repl-use-pretty-printing 't)
   (setq cider-pprint-fn 'fipp))
 
+(use-package cider-eval-sexp-fu
+  :ensure t)
+
 (use-package paredit
   :ensure t
   :pin melpa-stable

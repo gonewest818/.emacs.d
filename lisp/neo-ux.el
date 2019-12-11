@@ -54,6 +54,11 @@
      `(fringe ((t (:foreground ,zenburn-fg :background ,zenburn-bg))))
      ;; make these easier to see
      `(cider-fringe-good-face ((t (:foreground ,zenburn-green+1))))
+     ;; bring the eval "flashes" in line with this theme
+     `(eval-sexp-fu-flash
+       ((t (:background ,zenburn-blue-5 :bold t))))
+     `(eval-sexp-fu-flash-error
+       ((t (:background ,zenburn-red-3 :bold t))))
      ;; modeline customizations
      `(mode-line
        ((,class (:box (:line-width 1 :color ,zenburn-bg-2)
