@@ -15,10 +15,11 @@
              ;jump-to-org-agenda
              )
   :init
-  (setq org-directory "~/Dropbox/org")
-  (setq org-mobile-inbox-for-pull "~/Dropbox/org/flagged.org")
-  (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg"))
+  (setq org-directory "~/Dropbox/org"))
 
 (use-package ox-md
   :after (org))
 
+(use-package ox-hugo
+  :ensure t
+  :after ox)
