@@ -9,6 +9,7 @@
   :ensure t
   :pin melpa-stable
   :after (flycheck flycheck-clj-kondo)
+  :mode "\\.\\(clj\\|cljs\\|cljc\\)\\'"
   :config
   (setq clojure-align-forms-automatically t)
   (define-clojure-indent

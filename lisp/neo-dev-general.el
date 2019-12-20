@@ -28,6 +28,17 @@
   :pin melpa-stable
   :init (global-flycheck-mode))
 
+(use-package restclient
+  :ensure t
+  :commands (restclient-mode))
+
+(use-package company-restclient
+  :ensure t
+  :after company
+  :commands (company-restclient)
+  :init
+  (add-to-list 'company-backends 'company-restclient))
+
 (use-package markdown-mode
   :ensure t
   :pin melpa-stable
