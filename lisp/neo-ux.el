@@ -7,6 +7,8 @@
       :config
       (setq dimmer-fraction 0.1)
       (setq dimmer-adjustment-mode :both)
+      ;; (push (lambda (b) (not (buffer-file-name b)))
+      ;;       dimmer-buffer-exclusion-predicates)
       (dimmer-configure-which-key)
       (dimmer-configure-helm)
       (dimmer-mode t))
@@ -88,10 +90,11 @@
 
 (global-hl-line-mode)                   ; highlight current line
 
-(set-frame-font "Inconsolata-12" nil t)
+;;(set-frame-font "Inconsolata-12" nil t)
 
-;; Every time a frame is started, make sure it get maximized
+;; Configure new frames
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(font . "Inconsolata-12"))
 
 ;; Winner mode allows layout undo [C-c left] & redo [C-c right]
 (winner-mode t)
