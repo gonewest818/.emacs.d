@@ -23,6 +23,16 @@
   :pin melpa
   :after magit)
 
+(use-package magit-circleci
+  :ensure t
+  :after magit
+  :hook (magit-mode . magit-circleci-mode)
+  :config
+  (setq magit-circleci-token
+        ;; use `auth-source-search' to protect API key
+        (if-let (auth (auth-source-search :host "circleci.com"))
+            (funcall (plist-get (car auth) :secret)))))
+
 (use-package flycheck
   :ensure t
   :pin melpa-stable
