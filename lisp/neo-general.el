@@ -20,3 +20,7 @@
                      "-o" "page-left=32"
                      "-o" "page-right=32"))
 (setq lpr-page-header-switches '("-l" "80")) ; lines per page
+
+;; Dired configuration
+;; See https://www.emacswiki.org/emacs/DiredReuseDirectoryBuffer
+(put 'dired-find-alternate-file 'disabled nil)
