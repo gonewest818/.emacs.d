@@ -2,8 +2,7 @@
 ;; GENERAL SETTINGS
 
 (use-package better-defaults
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
 
 (set-language-environment "UTF-8")
 
