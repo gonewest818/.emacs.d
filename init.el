@@ -18,8 +18,9 @@
 (setq package-pinned-packages
       '((bind-key             . "melpa")
         (diminish             . "melpa")
-        (use-package          . "melpa")
-        (exec-path-from-shell . "melpa")))
+        (exec-path-from-shell . "melpa")
+        (no-littering         . "melpa")
+        (use-package          . "melpa")))
 
 ;; Refresh package archive contents only if it's empty.
 ;; If you need to update packages, do it manually.
@@ -40,9 +41,14 @@
 (require 'bind-key)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; NO-LITTERING (https://github.com/emacscollective/no-littering)
+
+(require 'no-littering)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CUSTOM
 
-(setq custom-file (concat user-emacs-directory "custom.el"))
+(setq custom-file (no-littering-expand-etc-file-name "custom.el"))
 (when (file-readable-p custom-file) (load custom-file))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
