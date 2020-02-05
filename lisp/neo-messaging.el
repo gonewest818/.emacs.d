@@ -13,14 +13,12 @@
   :bind ("C-c ee" . erc)
   :init
   ;; Keep passwords out of GitHub
-  (let ((ercpass "~/.emacs.d/.erc-auth")) ; <== (setq my-freenode-pass "...")
-    (if (file-readable-p ercpass)
-        (progn
-          (load ercpass)
-          (setq erc-nickserv-passwords
-                `((freenode (("gonewest"    . ,my-freenode-pass)
-                             ("gonewest818" . ,my-freenode-pass)))
-                  (QuakeNet (("gonewest818" . ,my-quakenet-pass))))))))
+  (setq erc-nickserv-passwords
+        `((freenode
+           (("gonewest"    . ,(neo/secret "irc.freenode.net" "gonewest"))
+            ("gonewest818" . ,(neo/secret "irc.freenode.net" "gonewest818"))))
+          (QuakeNet
+           (("gonewest818" . ,(neo/secret "irc.quakenet.org" "gonewest818"))))))
 
   ;; Convenience key bindings
   (global-set-key "\C-cef" (lambda ()
@@ -41,7 +39,7 @@
                               :server   "irc.gitter.im"
                               :port     "6697"
                               :nick     "gonewest818"
-                              :password my-gitter-pass)))
+                              :password (neo/secret "irc.gitter.im"))))
 
   :config
   (require 'tls)
@@ -86,10 +84,11 @@
   (setq slack-buffer-function #'switch-to-buffer) ; ???
   (setq slack-completing-read-function #'ivy-completing-read)
   :config
-  (slack-register-team
-   :name "novaalumn"
-   :default t
-   :client-id my-slack-novaalumn-id
-   :token my-slack-novaalumn-token
-   :subscribed-channels '(novaops general)
-   :full-and-display-names t))
+  (if-let ((secret (split-string (neo/secret "slack.com") "/")))
+      (slack-register-team
+       :name "novaalumn"
+       :default t
+       :client-id (nth 0 secret)
+       :token (nth 1 secret)
+       :subscribed-channels '(novaops general)
+       :full-and-display-names t)))

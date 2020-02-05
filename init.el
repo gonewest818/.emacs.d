@@ -61,6 +61,15 @@
   (exec-path-from-shell-initialize))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; SECRETS
+
+(defun neo/secret (host &optional user)
+  (if-let (auth (if user
+                    (auth-source-search :host host :user user)
+                  (auth-source-search :host host)))
+      (funcall (plist-get (car auth) :secret))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CUSTOMIZATIONS
 
 (load "neo-wip")
@@ -75,3 +84,4 @@
 (load "neo-ux")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(put 'erase-buffer 'disabled nil)
