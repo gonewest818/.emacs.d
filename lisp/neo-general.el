@@ -20,6 +20,9 @@
 
 (set-language-environment "UTF-8")
 
+;; allow erase-buffer without warning
+(put 'erase-buffer 'disabled nil)
+
 ;; Print settings
 ;; When changing the font size you also need to adjust the pagination
 ;; as follows:
