@@ -1,22 +1,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GENERAL SETTINGS
 
-(let ((bd-path (concat user-emacs-directory "dev/better-defaults")))
-  ;; we have a locally patched version that doesn't override no-littering
-  (message "using dev version of better-defaults")
-  (if (file-directory-p bd-path)
-      (progn
-        (add-to-list 'load-path bd-path)
-        (use-package better-defaults))
-    ;; whereas in the published version we need to reset some paths
-    (use-package better-defaults
-      :ensure t
-      :config
-      (message "using melpa version of better-defaults")
-      (setq save-place-file                 ; override the better-default
-            (no-littering-expand-var-file-name "places"))
-      (setq backup-directory-alist          ; override the better-default
-            `(("." . ,(no-littering-expand-var-file-name "backups")))))))
+(use-package better-defaults
+  :ensure t)
 
 (set-language-environment "UTF-8")
 
