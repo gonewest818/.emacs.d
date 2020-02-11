@@ -28,7 +28,8 @@
   :after magit
   :hook (magit-mode . magit-circleci-mode)
   :config
-  (setq magit-circleci-token (neo/secret "circleci.com")))
+  (setq magit-circleci-token (auth-source-pick-first-password
+                              :host "circleci.com")))
 
 (use-package flycheck
   :ensure t

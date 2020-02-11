@@ -67,13 +67,11 @@
   (exec-path-from-shell-initialize))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; SECRETS
+;; AUTH-SOURCE AND GNUPG
 
-(defun neo/secret (host &optional user)
-  (if-let (auth (if user
-                    (auth-source-search :host host :user user)
-                  (auth-source-search :host host)))
-      (funcall (plist-get (car auth) :secret))))
+;;(setq auth-source-debug t)
+(setq auth-sources '((:source "~/.authinfo.gpg")))
+(setq epa-pinentry-mode 'loopback)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CUSTOMIZATIONS

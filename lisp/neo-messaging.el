@@ -9,37 +9,36 @@
     (setq alert-default-style 'notifier)))
 
 (use-package erc
-  :commands erc
+  :commands (erc erc-tls)
   :bind ("C-c ee" . erc)
   :init
-  ;; Keep passwords out of GitHub
-  (setq erc-nickserv-passwords
-        `((freenode
-           (("gonewest"    . ,(neo/secret "irc.freenode.net" "gonewest"))
-            ("gonewest818" . ,(neo/secret "irc.freenode.net" "gonewest818"))))
-          (QuakeNet
-           (("gonewest818" . ,(neo/secret "irc.quakenet.org" "gonewest818"))))))
-
   ;; Convenience key bindings
   (global-set-key "\C-cef" (lambda ()
                              (interactive)
                              (erc-tls
                               :server   "irc.freenode.net"
                               :port     "6697"
-                              :nick     "gonewest818")))
+                              :nick     "gonewest818"
+                              :password (auth-source-pick-first-password
+                                         :host "irc.freenode.net"
+                                         :user "gonewest818"))))
   (global-set-key "\C-ceq" (lambda ()
                              (interactive)
                              (erc
                               :server   "irc.quakenet.org"
                               :port     "6667"
-                              :nick     "gonewest818")))
+                              :nick     "gonewest818"
+                              :password (auth-source-pick-first-password
+                                         :host "irc.quakenet.org"
+                                         :user "gonewest818"))))
   (global-set-key "\C-ceg" (lambda ()
                              (interactive)
                              (erc-tls
                               :server   "irc.gitter.im"
                               :port     "6697"
                               :nick     "gonewest818"
-                              :password (neo/secret "irc.gitter.im"))))
+                              :password (auth-source-pick-first-password
+                                         :host "irc.gitter.im"))))
 
   :config
   (require 'tls)
@@ -84,11 +83,11 @@
   (setq slack-buffer-function #'switch-to-buffer) ; ???
   (setq slack-completing-read-function #'ivy-completing-read)
   :config
-  (if-let ((secret (split-string (neo/secret "slack.com") "/")))
+  (if-let ((secret (auth-source-pick-first-password
+                    :host "novaalumn.slack.com")))
       (slack-register-team
        :name "novaalumn"
        :default t
-       :client-id (nth 0 secret)
-       :token (nth 1 secret)
+       :token secret
        :subscribed-channels '(novaops general)
        :full-and-display-names t)))
