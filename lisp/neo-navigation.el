@@ -45,6 +45,10 @@
         (cons "~/Documents/code/" (file-expand-wildcards "~/Documents/code/dev-*")))
   (projectile-global-mode 1))
 
+(use-package projectile-ripgrep
+  :ensure t
+  :commands (projectile-ripgrep))
+
 (use-package ibuffer-projectile
   :ensure t
   :commands (ibuffer-projectile-set-filter-groups
