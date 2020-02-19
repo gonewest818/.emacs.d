@@ -8,6 +8,16 @@
   (when (string-equal system-type "darwin")
     (setq alert-default-style 'notifier)))
 
+(use-package elfeed
+  :ensure t
+  :commands (elfeed)
+  :bind ("C-c w" . elfeed)
+  :config (elfeed-goodies/setup))
+
+(use-package elfeed-goodies
+  :ensure t
+  :commands (elfeed-goodies/setup))
+
 (use-package erc
   :commands (erc erc-tls)
   :bind ("C-c ee" . erc)
@@ -57,9 +67,13 @@
                                                   "#clojure"
                                                   "#clojurescript"
                                                   "#clojure-emacs"
-                                                  "#emacs"
+                                                  "##cymatics"
                                                   "#datomic"
-                                                  "#leiningen")
+                                                  "#demoscene"
+                                                  "#emacs"
+                                                  "#leiningen"
+                                                  "#processing"
+                                                  "#supercollider")
                                       ("QuakeNet" "#overwatch")))
 
   ;; Track mode configuration
@@ -70,7 +84,8 @@
 (use-package slack
   :ensure t
   :commands (slack-start)
-  :bind (("C-x j" . slack-select-rooms)
+  :bind (("C-c es" . slack-start)
+         ("C-x j" . slack-select-rooms)
          :map slack-mode-map
          ("C-c C-d" . slack-message-delete)
          ("C-c C-e" . slack-message-edit)
