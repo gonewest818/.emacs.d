@@ -12,11 +12,13 @@
   :ensure t
   :commands (elfeed)
   :bind ("C-c w" . elfeed)
-  :config (elfeed-goodies/setup))
+  :config (elfeed-org))
 
-(use-package elfeed-goodies
+(use-package elfeed-org
   :ensure t
-  :commands (elfeed-goodies/setup))
+  :commands (elfeed-org)
+  :config (setq rmh-elfeed-org-files
+                (list (no-littering-expand-etc-file-name "elfeed.org.gpg"))))
 
 (use-package erc
   :commands (erc erc-tls)
@@ -62,19 +64,8 @@
   (erc-update-modules)
   (setq erc-prompt-for-nickserv-password nil)
 
-  ;; Automate joining channels at startup
-  (setq erc-autojoin-channels-alist '(("freenode" "#docker"
-                                                  "#clojure"
-                                                  "#clojurescript"
-                                                  "#clojure-emacs"
-                                                  "##cymatics"
-                                                  "#datomic"
-                                                  "#demoscene"
-                                                  "#emacs"
-                                                  "#leiningen"
-                                                  "#processing"
-                                                  "#supercollider")
-                                      ("QuakeNet" "#overwatch")))
+  ;; Read channel list from a separate file
+  (load-file (no-littering-expand-etc-file-name "erc-channels.el.gpg"))
 
   ;; Track mode configuration
   (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
