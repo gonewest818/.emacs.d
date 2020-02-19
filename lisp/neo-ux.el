@@ -5,12 +5,10 @@
     (use-package dimmer
       :load-path "~/.emacs.d/dev/dimmer.el/"
       :config
-      (setq dimmer-fraction 0.25)
+      (setq dimmer-fraction 0.30)
       (setq dimmer-adjustment-mode :foreground)
-      ;; (push (lambda (b) (not (buffer-file-name b)))
-      ;;       dimmer-buffer-exclusion-predicates)
       (dimmer-configure-which-key)
-      (dimmer-configure-helm)
+      (dimmer-configure-org)
       (dimmer-mode t))
   (use-package dimmer
     :ensure t
@@ -18,7 +16,7 @@
     (setq dimmer-fraction 0.25)
     (setq dimmer-adjustment-mode :foreground)
     (dimmer-configure-which-key)
-    (dimmer-configure-helm)
+    (dimmer-configure-org)
     (dimmer-mode t)))
 
 (use-package highlight-symbol
