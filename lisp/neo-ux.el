@@ -34,6 +34,8 @@
   :config
   (line-number-mode 1)
   (column-number-mode 1)
+  (setq battery-mode-line-format "[%b%p%%]")
+  (display-battery-mode 1)
   (setq display-time-format "%l:%M%#p") ; e.g. 4:48pm
   (setq display-time-default-load-average 0)
   (display-time-mode 1)
