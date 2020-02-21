@@ -8,6 +8,22 @@
   (when (string-equal system-type "darwin")
     (setq alert-default-style 'notifier)))
 
+(defun neo-elfeed-search-tag-saved ()
+  "Tag article at point with `saved'."
+  (interactive)
+  (save-excursion
+    (push-mark (point) t t)
+    (elfeed-search-tag-all 'saved)
+    (pop-mark)))
+
+(defun neo-elfeed-search-untag-saved ()
+  "Tag article at point with `saved'."
+  (interactive)
+  (save-excursion
+    (push-mark (point) t t)
+    (elfeed-search-untag-all 'saved)
+    (pop-mark)))
+
 (defun neo-elfeed-search-tag-unread-to-point (arg)
   "Tag articles above the point with `unread'.
 If prefix ARG is present, tag articles below the point."
@@ -37,6 +53,10 @@ If prefix ARG is present, tag articles below the point."
   :commands (elfeed)
   :bind (("C-c w" . elfeed)
          :map elfeed-search-mode-map
+         ("+" . elfeed-search-tag-all)
+         ("_" . elfeed-search-untag-all)
+         ("=" . neo-elfeed-search-tag-saved)
+         ("-" . neo-elfeed-search-untag-saved)
          ("R" . neo-elfeed-search-untag-unread-to-point)
          ("U" . neo-elfeed-search-tag-unread-to-point))
   :config (elfeed-org))
