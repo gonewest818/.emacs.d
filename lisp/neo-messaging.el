@@ -8,10 +8,37 @@
   (when (string-equal system-type "darwin")
     (setq alert-default-style 'notifier)))
 
+(defun neo-elfeed-search-tag-unread-to-point (arg)
+  "Tag articles above the point with `unread'.
+If prefix ARG is present, tag articles below the point."
+  (interactive "P")
+  (save-excursion
+    (push-mark (point) t t)
+    (if arg
+        (goto-char (point-max))
+      (goto-char (point-min)))
+    (elfeed-search-tag-all-unread)
+    (pop-mark)))
+
+(defun neo-elfeed-search-untag-unread-to-point (arg)
+  "Untag articles above the point, removing `unread'.
+If prefix ARG is present, tag articles below the point."
+  (interactive "P")
+  (save-excursion
+    (push-mark (point) t t)
+    (if arg
+        (goto-char (point-max))
+      (goto-char (point-min)))
+    (elfeed-search-untag-all-unread)
+    (pop-mark)))
+
 (use-package elfeed
   :ensure t
   :commands (elfeed)
-  :bind ("C-c w" . elfeed)
+  :bind (("C-c w" . elfeed)
+         :map elfeed-search-mode-map
+         ("R" . neo-elfeed-search-untag-unread-to-point)
+         ("U" . neo-elfeed-search-tag-unread-to-point))
   :config (elfeed-org))
 
 (use-package elfeed-org
