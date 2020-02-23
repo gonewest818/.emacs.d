@@ -82,6 +82,7 @@
 (load "neo-dev-lisp")
 (load "neo-games")
 (load "neo-messaging")
+(load "neo-browsing")
 (load "neo-navigation")
 (load "neo-org")
 (load "neo-shell")
