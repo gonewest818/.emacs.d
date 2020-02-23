@@ -63,8 +63,11 @@
     (interactive)
     (setq ibuffer-filter-groups
           (nconc (ibuffer-projectile-generate-filter-groups)
-                 '(("irc" (mode . erc-mode))
-                   ("slack" (mode . slack-message-buffer-mode)))))
+                 '(("irc"    (mode . erc-mode))
+                   ("browse" (or (mode . elfeed-search-mode)
+                                 (name . "^\\*elfeed-.*\\*$")
+                                 (mode . eww-mode)))
+                   ("slack"  (mode . slack-message-buffer-mode)))))
     (message "ibuffer: filter groups set")
     (let ((ibuf (get-buffer "*Ibuffer*")))
       (when ibuf
