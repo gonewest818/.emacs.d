@@ -75,3 +75,13 @@
           (pop-to-buffer ibuf)
           (ibuffer-update nil t)))))
   (add-hook 'ibuffer-hook #'neo-set-filter-groups))
+
+;; when visiting emacs source buffers, make them read-only
+(dir-locals-set-class-variables
+ 'emacs-sources
+ '((nil . ((buffer-read-only . t)))))
+(mapc (lambda (d)
+        (dir-locals-set-directory-class d 'emacs-sources))
+      (list "/usr/local/share/emacs"
+            "/Applications/Emacs.app/Contents/Resources"
+            (concat user-emacs-directory "elpa")))
