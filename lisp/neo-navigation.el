@@ -76,6 +76,12 @@
           (ibuffer-update nil t)))))
   (add-hook 'ibuffer-hook #'neo-set-filter-groups))
 
+(use-package avy
+  :ensure t
+  :bind (("M-g g" . avy-goto-line)
+         ("C-;" . avy-goto-char)
+         ("C-'" . avy-goto-char-2)))
+
 (use-package dumb-jump
   :ensure t
   :bind (("M-g o" . dumb-jump-go-other-window)
