@@ -31,18 +31,20 @@
   :ensure t
   :pin melpa-stable
   :hook (after-init . sml/setup)
-  :config
-  (line-number-mode 1)
-  (column-number-mode 1)
-  (setq battery-mode-line-format "[%b%p%%]")
-  (display-battery-mode 1)
+  :init
+  (setq sml/battery-format " %b%p%%")
   (setq display-time-format "%l:%M%#p") ; e.g. 4:48pm
   (setq display-time-default-load-average 0)
-  (display-time-mode 1)
+  (setq sml/use-projectile-p 'before-prefixes)
   (setq sml/shorten-directory t)
   (setq sml/shorten-modes t)
   (setq sml/name-width 40)
-  (setq sml/mode-width 'full))
+  (setq sml/mode-width 'full)
+  :config
+  (line-number-mode 1)
+  (column-number-mode 1)
+  (display-time-mode 1)
+  (display-battery-mode 1))
 
 (use-package zenburn-theme
   :ensure t
