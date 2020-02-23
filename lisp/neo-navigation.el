@@ -42,7 +42,7 @@
   (setq projectile-completion-system 'ivy)
   (setq projectile-sort-order 'recently-active)
   (setq projectile-project-search-path
-        (cons "~/Documents/code/" (file-expand-wildcards "~/Documents/code/dev-*")))
+        (file-expand-wildcards "~/Documents/code/[a-z0-9]*"))
   (projectile-global-mode 1))
 
 (use-package projectile-ripgrep
