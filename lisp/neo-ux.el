@@ -92,8 +92,6 @@
 
 (global-hl-line-mode)                   ; highlight current line
 
-;;(set-frame-font "Inconsolata-12" nil t)
-
 ;; Configure new frames
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(font . "Inconsolata-12"))
@@ -101,15 +99,12 @@
 ;; Winner mode allows layout undo [C-c left] & redo [C-c right]
 (winner-mode t)
 
-;; Customize the visible bell to flash only the mode line
-(setq visible-bell nil)
-
-(defun my-terminal-visible-bell ()
+(defun neo-terminal-visible-bell ()
   "A friendlier visual bell effect."
   (invert-face 'mode-line)
   (run-with-timer 0.1 nil 'invert-face 'mode-line))
 
-(setq ring-bell-function #'my-terminal-visible-bell)
+(setq ring-bell-function #'neo-terminal-visible-bell)
 
 ;; Scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
@@ -118,10 +113,10 @@
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 
 ;; TAB navigation
-(defun other-window-rev ()
+(defun neo-other-window-rev ()
   "other-window with reversed direction for keybinding"
   (interactive)
   (other-window -1))
 
 (global-set-key (kbd "C-<tab>")   'other-window)
-(global-set-key (kbd "C-S-<tab>") 'other-window-rev)
+(global-set-key (kbd "C-S-<tab>") 'neo-other-window-rev)
