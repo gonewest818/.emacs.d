@@ -101,5 +101,5 @@
 (mapc (lambda (d)
         (dir-locals-set-directory-class d 'emacs-sources))
       (list "/usr/local/share/emacs"
-            "/Applications/Emacs.app/Contents/Resources"
-            (concat user-emacs-directory "elpa")))
+            "/Applications/Emacs.app/Contents/Resources"))
+
