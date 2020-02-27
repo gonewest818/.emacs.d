@@ -78,14 +78,15 @@
 
 (load "neo-wip")
 (load "neo-general")
+(load "neo-browsing")
 (load "neo-dev-general")
 (load "neo-dev-lisp")
 (load "neo-games")
 (load "neo-messaging")
-(load "neo-browsing")
 (load "neo-navigation")
 (load "neo-org")
 (load "neo-shell")
 (load "neo-ux")
+(load "neo-writing")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

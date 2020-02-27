@@ -56,7 +56,7 @@ If prefix ARG is present, tag articles as `unread'."
 (use-package elfeed
   :ensure t
   :commands (elfeed)
-  :bind (("C-c w" . elfeed)
+  :bind (("C-c n" . elfeed)
          :map elfeed-search-mode-map
          ("+" . elfeed-search-tag-all)
          ("_" . elfeed-search-untag-all)
