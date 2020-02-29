@@ -79,8 +79,8 @@
 (use-package avy
   :ensure t
   :bind (("M-g g" . avy-goto-line)
-         ("C-;" . avy-goto-char)
-         ("C-'" . avy-goto-char-2)))
+         ("C-:"   . avy-goto-char)
+         ("C-\""  . avy-goto-char-2)))
 
 (use-package dumb-jump
   :ensure t
@@ -102,4 +102,3 @@
         (dir-locals-set-directory-class d 'emacs-sources))
       (list "/usr/local/share/emacs"
             "/Applications/Emacs.app/Contents/Resources"))
-
