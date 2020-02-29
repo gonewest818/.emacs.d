@@ -3,12 +3,15 @@
 
 (use-package org
   :mode ("\\.org$" . org-mode)
-  :bind (("C-c a" . org-agenda)
-         ("C-c l" . org-store-link)
-         ("C-c c" . org-capture))
+  :bind (("C-c a"  . org-agenda)
+         ("C-c l"  . org-store-link)
+         ("C-c c"  . org-capture))
   :init
   (setq org-directory "~/Dropbox/org")
   (setq org-agenda-files '("~/Dropbox/org"))
+  (setq org-refile-targets
+        '((nil :maxlevel . 2)
+          (org-agenda-files :maxlevel . 2)))
   (setq org-capture-templates
         '(("t" "ToDo" entry
            (file+headline "~/Dropbox/org/index.org" "Unfiled Tasks")
