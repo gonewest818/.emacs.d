@@ -73,3 +73,11 @@ If prefix ARG is present, tag articles as `unread'."
   :config
   (setq rmh-elfeed-org-files
         (list (no-littering-expand-etc-file-name "elfeed.org.gpg"))))
+
+(use-package wolfram
+  :ensure t
+  :bind (("C-c ew" . wolfram-alpha))
+  :config (setq wolfram-alpha-app-id
+                (auth-source-pick-first-password
+                 :host "api.wolframalpha.com"
+                 :user "wolfram.el")))
