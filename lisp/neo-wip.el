@@ -1,13 +1,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; EMACS PACKAGES IN DEVELOPMENT
 
+(use-package deferred
+  :ensure t)
 
-;;; MINIATURE-CALENDAR, as a splash screen
-(let ((mincal-path (concat user-emacs-directory "dev/mincal.el")))
-  (when (file-directory-p mincal-path)
-    (add-to-list 'load-path mincal-path)
-    (use-package mincal
-      :pin manual
-      :commands (mincal-display mincal-retrieve)
-      :bind ("C-c qm" . mincal-display))))
+(use-package request-deferred
+  :ensure t)
+
+(use-package geolocation
+  :load-path "~/.emacs.d/dev/geolocation"
+  :commands (geolocation-update-position
+             geolocation-get-position
+             geolocation-scan-wifi))
+
+(use-package mincal
+  :load-path "~/.emacs.d/dev/mincal.el"
+  :commands (mincal-display mincal-retrieve)
+  :bind ("C-c qm" . mincal-display))
 
