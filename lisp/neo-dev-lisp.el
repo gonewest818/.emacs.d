@@ -65,9 +65,8 @@
 ;; FENNEL-LANG DEVELOPMENT
 
 (use-package fennel-mode
-  :load-path "~/.emacs.d/dev/fennel-mode"
-  :mode "\\.fnl\\'"
-  :config)
+  :ensure t
+  :mode "\\.fnl\\'")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ELISP DEVELOPMENT
@@ -76,4 +75,3 @@
   :ensure t
   :pin melpa-stable
   :commands (package-lint-buffer))
-
