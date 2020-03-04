@@ -7,6 +7,20 @@
 (use-package request-deferred
   :ensure t)
 
+(defun tablist--patch-wisent-total-conflicts (fn &rest args)
+  "Monkey patch `wisent-total-conflicts' to work around errors in 27.0.90.
+Supply a fictitious `load-file-name' to satisfy the code, and
+then call FN with ARGS.  This patch can be removed when the bug
+is resolved: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=39911"
+  (if (wisent-source)
+      (apply fn args)
+    (let ((load-file-name "tablist-fictitious-file.el"))
+      (apply fn args))))
+
+(unless (version< "27" emacs-version)
+  (advice-add 'wisent-total-conflicts
+              :around #'tablist--patch-wisent-total-conflicts))
+
 (defun neo-open-map-at-location ()
   "Open map at coordinates found in `geolocation-location'."
   (interactive)
