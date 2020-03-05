@@ -42,7 +42,10 @@ is resolved: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=39911"
   :bind (("C-c ql" . neo-open-map-at-location))
   :commands (geolocation-update-position
              geolocation-get-position
-             geolocation-scan-wifi))
+             geolocation-scan-wifi)
+  :config
+  (add-hook 'geolocation-update-hook #'geolocation-update-calendar)
+  (geolocation-update-position t))
 
 (use-package mincal
   :load-path "~/.emacs.d/dev/mincal.el"

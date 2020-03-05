@@ -74,6 +74,15 @@ If prefix ARG is present, tag articles as `unread'."
   (setq rmh-elfeed-org-files
         (list (no-littering-expand-etc-file-name "elfeed.org.gpg"))))
 
+(use-package forecast
+  :ensure t
+  :bind (("C-c qf" . forecast))
+  :config (setq forecast-units 'us
+                forecast-api-key
+                (auth-source-pick-first-password
+                 :host "api.darksky.net"
+                 :user "forecast.el")))
+
 (use-package wolfram
   :ensure t
   :bind (("C-c ew" . wolfram-alpha))
