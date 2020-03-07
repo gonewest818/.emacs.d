@@ -45,7 +45,11 @@ is resolved: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=39911"
              geolocation-scan-wifi)
   :config
   (add-hook 'geolocation-update-hook #'geolocation-update-calendar)
-  (geolocation-update-position t))
+  (geolocation-update-position))
+
+(use-package sf511
+  :load-path "~/.emacs.d/dev/sf511.el"
+  :bind (("C-c qs" . sf511-operators)))
 
 (use-package mincal
   :load-path "~/.emacs.d/dev/mincal.el"
