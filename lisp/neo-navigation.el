@@ -67,7 +67,8 @@
                    ("browse" (or (mode . elfeed-search-mode)
                                  (name . "^\\*elfeed-.*\\*$")
                                  (mode . eww-mode)))
-                   ("slack"  (mode . slack-message-buffer-mode)))))
+                   ("slack"  (mode . slack-message-buffer-mode))
+                   ("sf511"  (name . "^\\*sf511-.*\\*$")))))
     (message "ibuffer: filter groups set")
     (let ((ibuf (get-buffer "*Ibuffer*")))
       (when ibuf
