@@ -23,6 +23,25 @@
            (file+olp+datetree "~/Dropbox/org/journal.org")
            "* TODO %? %^g\n  %t\n  %i\n"))))
 
+(use-package org-super-agenda
+  :ensure t
+  :after org
+  :config
+  (setq org-super-agenda-groups
+        '((:name "Today" :time-grid t)
+          (:name "Important" :priority "A")
+          (:name "Next" :priority<= "B")
+          (:todo "IN-PROGRESS" :order 1)
+          (:todo "SCHEDULED" :order 2)
+          (:tag "job" :order 3)
+          (:tag "personal" :order 4)))
+  (org-super-agenda-mode 1))
+
+(use-package org-web-tools
+  :ensure t
+  :bind (("C-c il" . org-web-tools-insert-link-for-url)
+         ("C-c ie" . org-web-tools-insert-web-page-as-entry)))
+
 (use-package ox-md
   :after ox)
 
