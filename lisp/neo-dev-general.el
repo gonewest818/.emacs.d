@@ -14,8 +14,8 @@
          ("C-x M-g" . magit-dispatch-popup))
   :config
   (setq magit-repository-directories
-        `((,(concat (getenv "HOME") "/Documents/code") . 1)
-          (,user-emacs-directory . 2)))
+        `((,(concat (getenv "HOME") "/Documents/code") . 2)
+          (,user-emacs-directory . 1)))
   (setq magit-completing-read-function 'ivy-completing-read))
 
 (use-package forge
