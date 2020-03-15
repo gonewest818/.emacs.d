@@ -37,6 +37,12 @@
            (group-not "*special*" (auto-file))
            (auto-mode))
           (group
+           (lambda (b)
+             (if-let ((s (and (boundp 'erc-server-process)
+                              (buffer-local-value 'erc-server-process b))))
+                 (format "ERC: %s"
+                         (buffer-name (process-buffer s))))))
+          (group
            (group-or "RSS Feeds"
                      (name-match "elfeed" (rx bos "*elfeed-"))
                      (name-match "eww" (rx bos "*eww"))))
