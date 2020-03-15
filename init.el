@@ -76,7 +76,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CUSTOMIZATIONS
 
-(load "neo-wip")
 (load "neo-general")
 (load "neo-browsing")
 (load "neo-dev-general")
@@ -88,5 +87,6 @@
 (load "neo-shell")
 (load "neo-ux")
 (load "neo-writing")
+(load "neo-wip")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
