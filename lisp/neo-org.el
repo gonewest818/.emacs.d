@@ -12,6 +12,9 @@
   (setq org-refile-targets
         '((nil :maxlevel . 2)
           (org-agenda-files :maxlevel . 2)))
+  (setq org-highest-priority ?A
+        org-lowest-priority  ?D
+        org-default-priority ?C)
   (setq org-capture-templates
         '(("t" "ToDo" entry
            (file+headline "~/Dropbox/org/index.org" "Unfiled Tasks")
