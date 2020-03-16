@@ -23,11 +23,12 @@
            ;; Subgroup collecting all named workspaces.
            (auto-workspace))
           (group
-           (group-or "Org Files"
-                     (dir (if (bound-and-true-p org-directory)
-                              org-directory
-                            "~/org"))
-                     (mode-match "org-agenda" (rx bos "org-agenda-")))
+           (group-and "Org Files"
+                     ;; (dir (if (bound-and-true-p org-directory)
+                     ;;          org-directory
+                     ;;        "~/org"))
+                     (mode-match "org" (rx bos "org-"))
+                     )
            (group
             ;; Subgroup collecting indirect Org buffers, grouping them by file.
             ;; This is very useful when used with `org-tree-to-indirect-buffer'.
