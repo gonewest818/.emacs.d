@@ -1,23 +1,25 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; USER INTERACTION AND DESIGN
 
-(if (setq nokamoto-dimmer-use-dev t)    ; set true to use dev version
-    (use-package dimmer
-      :load-path "~/.emacs.d/dev/dimmer.el/"
-      :config
-      (setq dimmer-fraction 0.30)
-      (setq dimmer-adjustment-mode :foreground)
-      (dimmer-configure-which-key)
-      (dimmer-configure-org)
-      (dimmer-mode t))
-  (use-package dimmer
-    :ensure t
-    :config
-    (setq dimmer-fraction 0.25)
-    (setq dimmer-adjustment-mode :foreground)
-    (dimmer-configure-which-key)
-    (dimmer-configure-org)
-    (dimmer-mode t)))
+(use-package dimmer
+  :if (file-exists-p "~/.emacs.d/dev/dimmer.el/")
+  :load-path "~/.emacs.d/dev/dimmer.el/"
+  :config
+  (setq dimmer-fraction 0.30)
+  (setq dimmer-adjustment-mode :foreground)
+  (dimmer-configure-which-key)
+  (dimmer-configure-org)
+  (dimmer-mode t))
+
+(use-package dimmer
+  :if (not (file-exists-p "~/.emacs.d/dev/dimmer.el/"))
+  :ensure t
+  :config
+  (setq dimmer-fraction 0.30)
+  (setq dimmer-adjustment-mode :foreground)
+  (dimmer-configure-which-key)
+  (dimmer-configure-org)
+  (dimmer-mode t))
 
 (use-package highlight-symbol
   :ensure t
