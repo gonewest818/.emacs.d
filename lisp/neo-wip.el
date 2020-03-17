@@ -2,18 +2,17 @@
 ;; EMACS PACKAGES IN DEVELOPMENT
 
 (use-package quelpa
+  :disabled t                           ; not needed at the moment
   :ensure t
   :init (setq quelpa-dir (no-littering-expand-var-file-name "quelpa")))
 
 (use-package quelpa-use-package
+  :disabled t                           ; not needed at the moment
   :ensure t
   :after quelpa)
 
 (use-package bufler
   :ensure t
-  :demand t
-  ;;:quelpa (bufler :fetcher github :repo "alphapapa/bufler.el")
-  :quelpa (bufler :fetcher github :repo "gonewest818/bufler.el" :branch "projectile-fix")
   :init
   (bind-key "C-x C-b" #'bufler)
   (bind-key "C-x b" #'bufler-workspace-switch-buffer)
