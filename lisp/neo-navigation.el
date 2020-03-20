@@ -24,7 +24,11 @@
 (use-package swiper
   :ensure t
   :pin melpa-stable
-  :bind ("C-s" . swiper))
+  :bind (("C-s" . swiper)
+         :map swiper-map
+         ("C-c C-t" . swiper-isearch-toggle)
+         :map isearch-mode-map
+         ("C-c C-t" . swiper-isearch-toggle)))
 
 (use-package counsel
   :ensure t
