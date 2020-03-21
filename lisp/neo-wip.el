@@ -2,14 +2,84 @@
 ;; EMACS PACKAGES IN DEVELOPMENT
 
 (use-package quelpa
-  :disabled t                           ; not needed at the moment
   :ensure t
   :init (setq quelpa-dir (no-littering-expand-var-file-name "quelpa")))
 
 (use-package quelpa-use-package
-  :disabled t                           ; not needed at the moment
   :ensure t
   :after quelpa)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; emacs orphanage packages
+
+(use-package anzu
+  :quelpa (anzu
+           :fetcher github
+           :repo "emacsorphanage/anzu"
+           :branch "master")
+  :ensure t)
+
+(use-package company-jedi
+  :disabled t
+  :quelpa (company-jedi
+           :fetcher github
+           :repo "emacsorphanage/company-jedi"
+           :branch "master")
+  :ensure t)
+
+(use-package dired-k
+  :quelpa (dired-k
+           :fetcher github
+           :repo "emacsorphanage/dired-k"
+           :branch "master")
+  :ensure t
+  :config
+  (bind-keys :map dired-mode-map
+             ((kbd "K") . dired-k)
+             ((kbd "g") . dired-k))
+  (add-hook 'dired-initial-position-hook 'dired-k)
+  (add-hook 'dired-after-readin-hook #'dired-k-no-revert))
+
+(use-package git-gutter
+  :disabled t
+  :quelpa (git-gutter
+           :fetcher github
+           :repo "emacsorphanage/git-gutter"
+           :branch "master")
+  :ensure t)
+
+(use-package git-gutter-fringe
+  :disabled t
+  :quelpa (git-gutter-fringe
+           :fetcher github
+           :repo "emacsorphanage/git-gutter-fringe"
+           :branch "master")
+  :ensure t)
+
+(use-package git-messenger
+  :quelpa (git-messenger
+           :fetcher github
+           :repo "emacsorphanage/git-messenger"
+           :branch "master")
+  :ensure t
+  :bind (("C-x vp" . git-messenger:popup-message)
+         :map git-messenger-map
+         ("m" . git-messenger:copy-message))
+  :config
+  (setq git-messenger:use-magit-popup t))
+
+(use-package smeargle
+  :quelpa (smeargle
+           :fetcher github
+           :repo "emacsorphanage/smeargle"
+           :branch "master")
+  :ensure t
+  :bind (("C-x vS" . smeargle)
+         ("C-x vC" . smeargle-commits)
+         ("C-x vZ" . smeargle-clear)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 (use-package bufler
   :ensure t
