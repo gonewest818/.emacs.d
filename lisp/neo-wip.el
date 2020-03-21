@@ -41,12 +41,19 @@
   (add-hook 'dired-after-readin-hook #'dired-k-no-revert))
 
 (use-package git-gutter
-  :disabled t
   :quelpa (git-gutter
            :fetcher github
            :repo "emacsorphanage/git-gutter"
            :branch "master")
-  :ensure t)
+  :ensure t
+  :bind (("C-x v g"   . git-gutter)
+         ("C-x v ="   . git-gutter:popup-hunk)
+         ("C-x v s"   . git-gutter:stage-hunk)
+         ("C-x v r"   . git-gutter:revert-hunk)
+         ("C-x v SPC" . git-gutter:mark-hunk)
+         ("C-x p"     . git-gutter:previous-hunk)
+         ("C-x n"     . git-gutter:next-hunk))
+  :init (global-git-gutter-mode t))
 
 (use-package git-gutter-fringe
   :disabled t
