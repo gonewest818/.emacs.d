@@ -93,6 +93,7 @@
   :init
   (bind-key "C-x C-b" #'bufler)
   (bind-key "C-x b" #'bufler-workspace-switch-buffer)
+  (setq bufler-use-cache nil)
   (setq bufler-groups
         (bufler-defgroups
           (group
