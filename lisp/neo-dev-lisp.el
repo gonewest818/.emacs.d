@@ -2,8 +2,7 @@
 ;; CLOJURE DEVELOPMENT
 
 (use-package flycheck-clj-kondo
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
 
 (use-package clojure-mode
   :ensure t

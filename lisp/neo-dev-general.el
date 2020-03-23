@@ -33,7 +33,6 @@
 
 (use-package flycheck
   :ensure t
-  :pin melpa-stable
   :init (global-flycheck-mode))
 
 (use-package restclient
