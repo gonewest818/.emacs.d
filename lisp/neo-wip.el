@@ -19,13 +19,21 @@
            :branch "master")
   :ensure t)
 
+(use-package python-environment
+  :ensure t
+  :init
+  (setq python-environment-directory "~/python-venv/")
+  (setq python-environment-default-root-name "company-jedi"))
+
 (use-package company-jedi
-  :disabled t
   :quelpa (company-jedi
            :fetcher github
            :repo "emacsorphanage/company-jedi"
            :branch "master")
-  :ensure t)
+  :ensure t
+  :after (company python-environment)
+  :init
+  (add-to-list 'company-backends 'company-jedi))
 
 (use-package dired-k
   :quelpa (dired-k
@@ -56,12 +64,12 @@
   :init (global-git-gutter-mode t))
 
 (use-package git-gutter-fringe
-  :disabled t
   :quelpa (git-gutter-fringe
            :fetcher github
            :repo "emacsorphanage/git-gutter-fringe"
            :branch "master")
-  :ensure t)
+  :ensure t
+  :after git-gutter)
 
 (use-package git-messenger
   :quelpa (git-messenger
