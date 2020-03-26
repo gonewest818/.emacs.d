@@ -60,6 +60,11 @@
      `(fringe ((t (:foreground ,zenburn-fg :background ,zenburn-bg))))
      ;; make these easier to see
      `(cider-fringe-good-face ((t (:foreground ,zenburn-green+1))))
+     ;; don't invert the git-gutter faces
+     `(git-gutter:added ((t (:foreground ,zenburn-green :weight bold :inherit default))))
+     `(git-gutter:deleted ((t (:foreground ,zenburn-red :weight bold :inherit default))))
+     `(git-gutter:modified ((t (:foreground ,zenburn-magenta :weight bold :inherit default))))
+     `(git-gutter:unchanged ((t (:background ,zenburn-yellow :inherit default))))
      ;; bring the eval "flashes" in line with this theme
      `(eval-sexp-fu-flash
        ((t (:background ,zenburn-blue-5 :bold t))))
