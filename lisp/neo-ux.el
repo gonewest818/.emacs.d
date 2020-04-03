@@ -64,7 +64,7 @@
      `(git-gutter:added ((t (:foreground ,zenburn-green :weight bold :inherit default))))
      `(git-gutter:deleted ((t (:foreground ,zenburn-red :weight bold :inherit default))))
      `(git-gutter:modified ((t (:foreground ,zenburn-magenta :weight bold :inherit default))))
-     `(git-gutter:unchanged ((t (:background ,zenburn-yellow :inherit default))))
+     `(git-gutter:unchanged ((t (:background ,zenburn-yellow-2 :inherit default))))
      ;; bring the eval "flashes" in line with this theme
      `(eval-sexp-fu-flash
        ((t (:background ,zenburn-blue-5 :bold t))))

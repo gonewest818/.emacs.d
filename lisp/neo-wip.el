@@ -61,9 +61,13 @@
          ("C-x v SPC" . git-gutter:mark-hunk)
          ("C-x p"     . git-gutter:previous-hunk)
          ("C-x n"     . git-gutter:next-hunk))
-  :init (global-git-gutter-mode t))
+  :diminish "gg"
+  :init
+  (setq git-gutter:unchanged-sign " ")
+  (global-git-gutter-mode t))
 
 (use-package git-gutter-fringe
+  :disabled t
   :quelpa (git-gutter-fringe
            :fetcher github
            :repo "emacsorphanage/git-gutter-fringe"
