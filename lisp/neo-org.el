@@ -22,8 +22,11 @@
           ("s" "Shopping Item" entry
            (file+headline "~/Dropbox/org/index.org" "Shopping")
            "* BUY %?\n  %t\n")
-          ("j" "Journal ToDo" entry
+          ("j" "Journal" entry
            (file+olp+datetree "~/Dropbox/org/journal.org")
+           "* TODO %? %^g\n  %t\n  %i\n")
+          ("p" "Project Log" entry
+           (file+olp+datetree "~/Dropbox/org/project.org")
            "* TODO %? %^g\n  %t\n  %i\n"))))
 
 (use-package org-super-agenda
