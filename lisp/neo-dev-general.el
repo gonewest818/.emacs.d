@@ -46,6 +46,17 @@
   :init
   (add-to-list 'company-backends 'company-restclient))
 
+(use-package hcl-mode
+  :ensure t)
+
+(use-package terraform-mode
+  :ensure t)
+
+(use-package company-terraform
+  :ensure t
+  :after company
+  :config (company-terraform-init))
+
 (use-package markdown-mode
   :ensure t
   :pin melpa-stable
