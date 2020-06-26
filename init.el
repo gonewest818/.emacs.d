@@ -69,8 +69,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; AUTH-SOURCE AND GNUPG
 
-;;(setq auth-source-debug t)
-(setq auth-sources '((:source "~/.authinfo.gpg")))
+(setq auth-source-debug t)
+(require 'auth-source-pass)
+(auth-source-pass-enable)
+;;(setq auth-sources '((:source "~/.authinfo.gpg")))
 (setq epa-pinentry-mode 'loopback)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
