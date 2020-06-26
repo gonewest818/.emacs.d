@@ -7,8 +7,8 @@
          ("C-c l"  . org-store-link)
          ("C-c c"  . org-capture))
   :init
-  (setq org-directory "~/Dropbox/org")
-  (setq org-agenda-files '("~/Dropbox/org"))
+  (setq org-directory "~/Box/neilo/org")
+  (setq org-agenda-files '("~/Box/neilo/org"))
   (setq org-refile-targets
         '((nil :maxlevel . 2)
           (org-agenda-files :maxlevel . 2)))
@@ -17,16 +17,16 @@
         org-default-priority ?C)
   (setq org-capture-templates
         '(("t" "ToDo" entry
-           (file+headline "~/Dropbox/org/index.org" "Unfiled Tasks")
+           (file+headline "~/Box/neilo/org/index.org" "Unfiled Tasks")
            "* TODO %?\n  %t\n  %i\n  %a")
           ("s" "Shopping Item" entry
-           (file+headline "~/Dropbox/org/index.org" "Shopping")
+           (file+headline "~/Box/neilo/org/index.org" "Shopping")
            "* BUY %?\n  %t\n")
           ("j" "Journal" entry
-           (file+olp+datetree "~/Dropbox/org/journal.org")
+           (file+olp+datetree "~/Box/neilo/org/journal.org")
            "* TODO %? %^g\n  %t\n  %i\n")
           ("p" "Project Log" entry
-           (file+olp+datetree "~/Dropbox/org/project.org")
+           (file+olp+datetree "~/Box/neilo/org/project.org")
            "* TODO %? %^g\n  %t\n  %i\n"))))
 
 (use-package org-super-agenda
