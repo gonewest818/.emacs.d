@@ -35,6 +35,45 @@
   :ensure t
   :init (global-flycheck-mode))
 
+(use-package lsp-mode
+  :ensure t
+  :after cmake-mode
+  :hook ((python-mode . lsp)
+         (c++-mode . lsp)
+         (cmake-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :config
+  (setq lsp-prefer-flymake nil
+        lsp-clients-clangd-executable "/usr/local/Cellar/llvm/10.0.1/bin/clangd"
+        lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
+
+(use-package lsp-ui
+  :ensure t
+  :requires lsp-mode flycheck
+  :hook (lsp-mode . lsp-ui-mode)
+  :config
+  (setq lsp-ui-doc-enable t
+        lsp-ui-doc-use-childframe t
+        lsp-ui-doc-position 'top
+        lsp-ui-doc-include-signature t
+        lsp-ui-doc-delay 0.75
+        lsp-ui-sideline-enable t
+        lsp-ui-sideline-show-hover t
+        lsp-ui-sideline-show-code-actions t
+        lsp-ui-sideline-show-symbol t
+        lsp-ui-sideline-show-diagnostics t
+        lsp-ui-flycheck-enable t
+        lsp-ui-flycheck-list-position 'right
+        lsp-ui-flycheck-live-reporting t
+        lsp-ui-peek-enable t
+        lsp-ui-peek-list-width 60
+        lsp-ui-peek-peek-height 25))
+
+(use-package cmake-mode
+  :ensure t
+  :mode (("CMakeLists\\.txt" . cmake-mode)
+         ("\\.cmake\\'" . cmake-mode)))
+
 (use-package restclient
   :ensure t
   :commands (restclient-mode))
