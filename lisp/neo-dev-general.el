@@ -73,5 +73,6 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (show-paren-mode 1)                     ; visualize matching parens
+(electric-pair-mode 1)                  ; insert matching brackets
 
 (setq-default comment-column 60)
