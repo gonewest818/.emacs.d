@@ -12,6 +12,10 @@
              ("<tab>"   . company-complete-common-or-cycle)
              ("S-<tab>" . company-select-previous)))
 
+(use-package company-box
+  :ensure t
+  :hook (company-mode . company-box-mode))
+
 (use-package ivy
   :ensure t
   :pin melpa-stable
