@@ -1,19 +1,47 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PYTHON DEVELOPMENT
 
-(use-package python-environment
+(use-package dap-mode
+  ;; For now use dap-mode only for python
+  ;; Must also install debugpy into the venv for your project
+  ;; to configure and launch
+  ;;   M-x dap-debug-edit-template
+  ;;   M-x dap-debug
   :ensure t
-  :init
-  (setq python-environment-directory "~/python-venv/")
-  (setq python-environment-default-root-name "company-jedi"))
+  :after lsp-mode
+  :hook ((python-mode . (lambda ()
+                          (require 'dap-python)
+                          (dap-mode t)
+                          ;(dap-ui-mode t)
+                          )))
+  :custom
+  (dap-python-debugger 'debugpy))
 
-(use-package company-jedi
-  :quelpa (company-jedi
-           :fetcher github
-           :repo "emacsorphanage/company-jedi"
-           :branch "master")
+(use-package lsp-pyright
+  ;; For more information see
+  ;;   https://github.com/microsoft/pyright
+  ;;   https://emacs-lsp.github.io/lsp-pyright
+  ;; Install as follows:
+  ;;   $ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+  ;;                             # (restart shell)
+  ;;   $ nvm install node        # (install the default node)
+  ;;   $ nvm current             # (check which node version is current)
+  ;;   $ npm install -g pyright
   :ensure t
-  :after (company python-environment)
-  :init
-  (add-to-list 'company-backends 'company-jedi))
+  :if (executable-find "pyright")
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp))))
 
+(use-package pyvenv
+  ;; To create a venv environment
+  ;;   $ python3 -m venv --system-site-packages myvenv
+  ;; To use
+  ;;   M-x pyvenv-activate
+  :ensure t
+  :after python
+  :hook (python-mode . pyvenv-mode)
+  :custom
+  (pyvenv-default-virtual-env-name "venv")
+  (pyvenv-mode-line-indicator '(pyvenv-virtual-env-name ("[venv:"
+                                                         pyvenv-virtual-env-name "]"))))

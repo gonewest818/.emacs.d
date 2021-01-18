@@ -38,8 +38,7 @@
 (use-package lsp-mode
   :ensure t
   :after cmake-mode
-  :hook ((python-mode . lsp)
-         (c++-mode . lsp)
+  :hook ((c++-mode . lsp)
          (cmake-mode . lsp)
          (lsp-mode . lsp-enable-which-key-integration))
   :config

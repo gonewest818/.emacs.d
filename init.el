@@ -80,6 +80,7 @@
 (load "neo-browsing")
 (load "neo-dev-general")
 (load "neo-dev-lisp")
+(load "neo-dev-python")
 (load "neo-games")
 (load "neo-messaging")
 (load "neo-navigation")
