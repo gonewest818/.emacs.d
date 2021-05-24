@@ -13,6 +13,15 @@
   :bind ("C-c ee" . erc)
   :init
   ;; Convenience key bindings
+  (global-set-key "\C-cel" (lambda ()
+                             (interactive)
+                             (erc-tls
+                              :server   "irc.libera.chat"
+                              :port     "6697"
+                              :nick     "gonewest818"
+                              :password (auth-source-pick-first-password
+                                         :host "irc.libera.chat"
+                                         :user "gonewest818"))))
   (global-set-key "\C-cef" (lambda ()
                              (interactive)
                              (erc-tls
