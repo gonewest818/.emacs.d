@@ -23,6 +23,10 @@
   :pin melpa
   :after magit)
 
+(use-package magit-annex
+  :ensure t
+  :after magit)
+
 (use-package magit-circleci
   :ensure t
   :after magit
