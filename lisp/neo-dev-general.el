@@ -102,6 +102,11 @@
          ("\\.markdown\\'"  . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
+(use-package yaml-mode
+  :ensure t
+  :mode (("\\.yml\\'"  . yaml-mode)
+         ("\\.yaml\\'" . yaml-mode)))
+
 (use-package rainbow-delimiters
   :ensure t
   :pin melpa-stable
