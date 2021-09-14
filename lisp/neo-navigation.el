@@ -45,7 +45,13 @@
   (setq projectile-completion-system 'ivy)
   (setq projectile-sort-order 'recently-active)
   (setq projectile-project-search-path
-        (file-expand-wildcards "~/Documents/code/[a-z0-9]*"))
+        (append '("~" "~/work")
+                (file-expand-wildcards "~/work/[a-z0-9]*")))
+  (setq projectile-project-root-functions
+        '(projectile-root-local
+          projectile-root-top-down
+          projectile-root-top-down-recurring
+          projectile-root-bottom-up))
   (projectile-global-mode 1))
 
 (use-package projectile-ripgrep
