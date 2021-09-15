@@ -50,7 +50,7 @@
                                          :host "irc.gitter.im"))))
 
   :config
-  (require 'tls)
+  ;(require 'tls)
 
   (setq erc-lurker-hide-list '("JOIN" "PART" "QUIT") ; or try erc-hide-list
         erc-lurker-threshold-time 3600)
