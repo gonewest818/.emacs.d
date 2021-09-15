@@ -14,26 +14,19 @@
          ("C-x M-g" . magit-dispatch-popup))
   :config
   (setq magit-repository-directories
-        `((,(concat (getenv "HOME") "/Documents/code") . 2)
+        `((,(concat (getenv "HOME") "/work") . 2)
           (,user-emacs-directory . 1)))
   (setq magit-completing-read-function 'ivy-completing-read))
+
+(use-package magit-lfs
+  :ensure t
+  :pin melpa
+  :after magit)
 
 (use-package forge
   :ensure t
   :pin melpa
   :after magit)
-
-(use-package magit-annex
-  :ensure t
-  :after magit)
-
-(use-package magit-circleci
-  :ensure t
-  :after magit
-  :hook (magit-mode . magit-circleci-mode)
-  :config
-  (setq magit-circleci-token (auth-source-pick-first-password
-                              :host "circleci.com")))
 
 (use-package flycheck
   :ensure t
