@@ -4,6 +4,14 @@
 (use-package better-defaults
   :ensure t)
 
+(use-package quelpa
+  :ensure t
+  :init (setq quelpa-dir (no-littering-expand-var-file-name "quelpa")))
+
+(use-package quelpa-use-package
+  :ensure t
+  :after quelpa)
+
 (set-language-environment "UTF-8")
 
 ;; allow erase-buffer without warning

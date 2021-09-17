@@ -1,14 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; EMACS PACKAGES IN DEVELOPMENT
 
-(use-package quelpa
-  :ensure t
-  :init (setq quelpa-dir (no-littering-expand-var-file-name "quelpa")))
-
-(use-package quelpa-use-package
-  :ensure t
-  :after quelpa)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emacs orphanage packages
 
