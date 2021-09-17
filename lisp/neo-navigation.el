@@ -72,6 +72,7 @@
     (setq ibuffer-filter-groups
           (nconc (ibuffer-projectile-generate-filter-groups)
                  '(("irc"    (mode . erc-mode))
+                   ("ement"  (name . "^\\*Ement Room"))
                    ("browse" (or (mode . elfeed-search-mode)
                                  (name . "^\\*elfeed-.*\\*$")
                                  (mode . eww-mode)))

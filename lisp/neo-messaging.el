@@ -8,6 +8,16 @@
   (when (string-equal system-type "darwin")
     (setq alert-default-style 'notifier)))
 
+(use-package plz
+  :ensure t
+  :after quelpa-use-package
+  :quelpa (plz :fetcher github :repo "alphapapa/plz.el"))
+
+(use-package ement
+  :ensure t
+  :after quelpa-use-package
+  :quelpa (ement :fetcher github :repo "alphapapa/ement.el"))
+
 (use-package erc
   :commands (erc erc-tls)
   :bind ("C-c ee" . erc)
