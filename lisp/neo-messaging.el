@@ -16,68 +16,10 @@
 (use-package ement
   :ensure t
   :after quelpa-use-package
-  :quelpa (ement :fetcher github :repo "alphapapa/ement.el"))
-
-(use-package erc
-  :commands (erc erc-tls)
-  :bind ("C-c ee" . erc)
-  :init
-  ;; Convenience key bindings
-  (global-set-key "\C-cel" (lambda ()
-                             (interactive)
-                             (erc-tls
-                              :server   "irc.libera.chat"
-                              :port     "6697"
-                              :nick     "gonewest818"
-                              :password (auth-source-pick-first-password
-                                         :host "irc.libera.chat"
-                                         :user "gonewest818"))))
-  (global-set-key "\C-cef" (lambda ()
-                             (interactive)
-                             (erc-tls
-                              :server   "irc.freenode.net"
-                              :port     "6697"
-                              :nick     "gonewest818"
-                              :password (auth-source-pick-first-password
-                                         :host "irc.freenode.net"
-                                         :user "gonewest818"))))
-  (global-set-key "\C-ceq" (lambda ()
-                             (interactive)
-                             (erc
-                              :server   "irc.quakenet.org"
-                              :port     "6667"
-                              :nick     "gonewest818"
-                              :password (auth-source-pick-first-password
-                                         :host "irc.quakenet.org"
-                                         :user "gonewest818"))))
-  (global-set-key "\C-ceg" (lambda ()
-                             (interactive)
-                             (erc-tls
-                              :server   "irc.gitter.im"
-                              :port     "6697"
-                              :nick     "gonewest818"
-                              :password (auth-source-pick-first-password
-                                         :host "irc.gitter.im"))))
-
+  :quelpa (ement :fetcher github :repo "alphapapa/ement.el")
+  :bind (("C-c ee" . ement-connect))
   :config
-  ;(require 'tls)
-
-  (setq erc-lurker-hide-list '("JOIN" "PART" "QUIT") ; or try erc-hide-list
-        erc-lurker-threshold-time 3600)
-  (setq erc-join-buffer 'bury) ; useful especially on reconnect
-
-  ;; Automate nickserv logins
-  (push 'services erc-modules)
-  (erc-update-modules)
-  (setq erc-prompt-for-nickserv-password nil)
-
-  ;; Read channel list from a separate file
-  (load-file (no-littering-expand-etc-file-name "erc-channels.el.gpg"))
-
-  ;; Track mode configuration
-  (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
-                                  "324" "329" "332" "333" "353" "477"))
-  (setq erc-track-exclude-server-buffer t))
+  (setq ement-save-sessions t))
 
 (use-package slack
   :ensure t
