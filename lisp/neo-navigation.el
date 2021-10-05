@@ -3,7 +3,6 @@
 
 (use-package company
   :ensure t
-  :pin melpa-stable
   :diminish "co"
   :hook (after-init . global-company-mode)
   :config
@@ -18,7 +17,6 @@
 
 (use-package ivy
   :ensure t
-  :pin melpa-stable
   :config
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
@@ -27,7 +25,6 @@
 
 (use-package swiper
   :ensure t
-  :pin melpa-stable
   :bind (("C-s" . swiper)
          :map swiper-map
          ("C-c C-t" . swiper-isearch-toggle)
@@ -36,14 +33,12 @@
 
 (use-package counsel
   :ensure t
-  :pin melpa-stable
   :diminish "cn"
   :config
   (counsel-mode t))
 
 (use-package projectile
   :ensure t
-  :pin melpa-stable
   :diminish "prj"
   :bind-keymap (("C-c p" . projectile-command-map))
   :config
