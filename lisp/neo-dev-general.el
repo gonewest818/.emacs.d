@@ -40,7 +40,7 @@
          (lsp-mode . lsp-enable-which-key-integration))
   :config
   (setq lsp-prefer-flymake nil
-        lsp-clients-clangd-executable "/usr/local/Cellar/llvm/10.0.1/bin/clangd"
+        lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd"
         lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
 
 (use-package lsp-ui
