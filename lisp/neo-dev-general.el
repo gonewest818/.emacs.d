@@ -85,7 +85,15 @@
   :ensure t)
 
 (use-package terraform-mode
-  :ensure t)
+  :ensure t
+  :mode (("\\.tf\\'"     . terraform-mode)
+         ("\\.tfvars\\'" . terraform-mode))
+  :hook (terraforn-mode . lsp)
+  :init
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection '("/usr/local/bin/terraform-ls" "serve"))
+                    :major-modes '(terraform-mode)
+                    :server-id 'terraform-)))
 
 (use-package company-terraform
   :ensure t
