@@ -23,11 +23,6 @@
   :pin melpa
   :after magit)
 
-(use-package forge
-  :ensure t
-  :pin melpa
-  :after magit)
-
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
@@ -89,7 +84,7 @@
   :mode (("\\.tf\\'"     . terraform-mode)
          ("\\.tfvars\\'" . terraform-mode))
   :hook (terraforn-mode . lsp)
-  :init
+  :config
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection '("/usr/local/bin/terraform-ls" "serve"))
                     :major-modes '(terraform-mode)
