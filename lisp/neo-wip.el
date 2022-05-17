@@ -40,6 +40,7 @@
   :diminish "gg"
   :init
   (setq git-gutter:unchanged-sign " ")
+  (setq git-gutter:handled-backends '(git svn))
   (global-git-gutter-mode t))
 
 (use-package git-gutter-fringe
