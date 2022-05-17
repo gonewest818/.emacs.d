@@ -65,8 +65,14 @@
   :mode (("CMakeLists\\.txt" . cmake-mode)
          ("\\.cmake\\'" . cmake-mode)))
 
-(use-package restclient
+(use-package jq-mode
   :ensure t
+  :mode (("\\.jq$" . jq-mode)))
+
+(use-package restclient
+  :quelpa (restclient
+           :fetcher git
+           :url "https://github.com/pashky/restclient.el.git")
   :commands (restclient-mode))
 
 (use-package company-restclient
