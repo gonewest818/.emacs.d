@@ -89,7 +89,7 @@
   :ensure t
   :mode (("\\.tf\\'"     . terraform-mode)
          ("\\.tfvars\\'" . terraform-mode))
-  :hook (terraforn-mode . lsp)
+  :hook (terraform-mode . lsp)
   :config
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection '("/usr/local/bin/terraform-ls" "serve"))
