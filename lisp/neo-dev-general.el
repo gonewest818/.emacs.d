@@ -5,7 +5,9 @@
   :ensure t
   :pin melpa
   :diminish "d*"
-  :bind ("C-c d" . docker))
+  :bind ("C-c d" . docker)
+  :config (setq docker-command "podman"
+                docker-compose-command "podman-compose"))
 
 (use-package magit
   :ensure t
