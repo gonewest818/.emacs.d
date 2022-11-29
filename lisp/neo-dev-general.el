@@ -71,6 +71,10 @@
   :ensure t
   :mode (("\\.jq$" . jq-mode)))
 
+(use-package protobuf-mode
+  :ensure t
+  :mode (("\\.proto$" . protobuf-mode)))
+
 (use-package restclient
   :quelpa (restclient
            :fetcher git
