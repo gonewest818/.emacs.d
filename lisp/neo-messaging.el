@@ -8,6 +8,18 @@
   (when (string-equal system-type "darwin")
     (setq alert-default-style 'notifier)))
 
+(use-package mastodon
+  :ensure t
+  :after quelpa-use-package
+  :quelpa (mastodon :fetcher git :url "https://codeberg.org/martianh/mastodon.el")
+  :bind (("C-c em" . mastodon))
+  :init
+  (setq mastodon-client--token-file
+        (no-littering-expand-var-file-name "mastodon.plstore"))
+  :config
+  (setq mastodon-instance-url "https://mastodon.online"
+        mastodon-active-user "neilo"))
+
 (use-package plz
   :ensure t
   :after quelpa-use-package
