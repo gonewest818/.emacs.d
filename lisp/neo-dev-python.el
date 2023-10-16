@@ -45,3 +45,8 @@
   (pyvenv-default-virtual-env-name "venv")
   (pyvenv-mode-line-indicator '(pyvenv-virtual-env-name ("[venv:"
                                                          pyvenv-virtual-env-name "]"))))
+
+(use-package lark-mode
+  :after quelpa-use-package
+  :quelpa (lark-mode :fetcher url :url "https://hg.sr.ht/~zondo/lark-mode/raw/lark-mode.el")
+  :mode (("\\.lark$" . lark-mode)))
