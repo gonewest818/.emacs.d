@@ -101,6 +101,7 @@
 
 ;; Configure new frames
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
 (add-to-list 'default-frame-alist '(font . "Inconsolata-12"))
 
 ;; Winner mode allows layout undo [C-c left] & redo [C-c right]
