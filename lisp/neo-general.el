@@ -23,13 +23,13 @@
 ;;   if "lpr-headers-switches" is non-nil, the flags are passed directly to lpr
 ;;   if "lpr-headers-switches" is nil, then pagination is done by pr
 ;;   you can pass flags to pr by setting "lpr-page-header-switches"
-(setq lpr-switches '("-o" "cpi=14"          ; characters per inch
-                     "-o" "lpi=8"           ; lines per inch
+(setq lpr-switches '("-o" "cpi=18"          ; characters per inch
+                     "-o" "lpi=9"           ; lines per inch
                      "-o" "page-top=32"     ; margins in points (1/72 inch)
                      "-o" "page-bottom=32"
                      "-o" "page-left=32"
                      "-o" "page-right=32"))
-(setq lpr-page-header-switches '("-l" "80")) ; lines per page
+(setq lpr-page-header-switches '("-l" "90" "-F" "-n")) ; lines per page
 
 ;; Dired configuration
 ;; See https://www.emacswiki.org/emacs/DiredReuseDirectoryBuffer
