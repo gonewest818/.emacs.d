@@ -105,6 +105,10 @@
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-prefer-searcher 'rg))
 
+(use-package vlf
+  :ensure t
+  :config (require 'vlf-setup))
+
 ;; when visiting emacs source buffers, make them read-only
 (dir-locals-set-class-variables
  'emacs-sources
