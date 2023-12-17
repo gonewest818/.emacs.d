@@ -1,6 +1,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GENERAL DEVELOPMENT
 
+(use-package gptel
+  :ensure t
+  :config
+  (setq-default
+    gptel-model "gpt4all-falcon-q4_0.gguf"
+    gptel-backend (gptel-make-gpt4all
+                   "GPT4All"
+                   :protocol "http"
+                   :host "localhost:4891"
+                   :models '("gpt4all-falcon-q4_0.gguf"
+                             "mistral-7b-instruct-v0.1.Q4_0.gguf"))
+    gptel-max-tokens 500))
+
 (use-package docker
   :ensure t
   :pin melpa

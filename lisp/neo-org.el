@@ -7,27 +7,27 @@
          ("C-c l"  . org-store-link)
          ("C-c c"  . org-capture))
   :init
-  (setq org-directory "~/Box/neilo/org")
-  (setq org-agenda-files '("~/Box/neilo/org"))
+  (setq org-directory "~/Box/Users/Neil Okamoto/org-mode")
+  (setq org-agenda-files '("~/Box/Users/Neil Okamoto/org-mode"))
   (setq org-refile-targets
         '((nil :maxlevel . 2)
           (org-agenda-files :maxlevel . 2)))
-  (setq org-highest-priority ?A
-        org-lowest-priority  ?D
-        org-default-priority ?C)
   (setq org-capture-templates
-        '(("t" "ToDo" entry
-           (file+headline "~/Box/neilo/org/index.org" "Unfiled Tasks")
+        `(("t" "Task" entry
+           (file+headline ,(expand-file-name "tasks.org" org-directory) "Unfiled Tasks")
            "* TODO %?\n  %t\n  %i\n  %a")
-          ("s" "Shopping Item" entry
-           (file+headline "~/Box/neilo/org/index.org" "Shopping")
-           "* BUY %?\n  %t\n")
-          ("j" "Journal" entry
-           (file+olp+datetree "~/Box/neilo/org/journal.org")
-           "* TODO %? %^g\n  %t\n  %i\n")
-          ("p" "Project Log" entry
-           (file+olp+datetree "~/Box/neilo/org/project.org")
-           "* TODO %? %^g\n  %t\n  %i\n"))))
+          ("r" "Read Later" entry
+           (file+headline ,(expand-file-name "reading.org" org-directory) "Reading")
+           "* TODO %?\n  %t\n")
+          ("p" "Pipeline" entry
+           (file+olp+datetree ,(expand-file-name "pipeline.org" org-directory))
+           "* TODO %? %^g\n  %t\n  %a\n")))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (python . t)
+     (sql . t)
+     (sqlite . t))))
 
 (use-package org-super-agenda
   :ensure t
@@ -47,6 +47,18 @@
   :ensure t
   :bind (("C-c il" . org-web-tools-insert-link-for-url)
          ("C-c ie" . org-web-tools-insert-web-page-as-entry)))
+
+(use-package org-ai
+  :ensure t
+  :commands (org-ai-mode
+             org-ai-global-mode)
+  :init
+  (add-hook 'org-mode-hook #'org-ai-mode)
+  (org-ai-global-mode)
+  :config
+  (setq org-ai-openai-api-token "")
+  ;; (setq org-ai-default-chat-model "gpt-4") ; if you are on the gpt-4 beta:
+  )
 
 (use-package ox-md
   :after ox)
