@@ -131,3 +131,4 @@
 (electric-pair-mode 1)                  ; insert matching brackets
 
 (setq-default comment-column 60)
+(setq enable-local-eval t)              ; necessary evil, using eval forms in .dir-locals.el
