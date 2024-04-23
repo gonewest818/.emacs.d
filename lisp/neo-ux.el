@@ -114,9 +114,14 @@
 
 (setq ring-bell-function #'neo-terminal-visible-bell)
 
-;; Scroll one line at a time (less "jumpy" than defaults)
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+;; trackpad and mouse scrolling behavior
+(if (version< emacs-version "29.1")
+    (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+  (progn ;; pixel scroll supported since 29.1
+    (setq mouse-wheel-scroll-amount '(0.1 ((shift) . 0.1))) ;; fractional lines
+    (pixel-scroll-precision-mode 1)
+    (setq pixel-scroll-precision-use-momentum t)))
+(setq mouse-wheel-progressive-speed nil) ;; do/don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 
