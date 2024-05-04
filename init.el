@@ -19,8 +19,7 @@
       '((bind-key             . "melpa")
         (diminish             . "melpa")
         (exec-path-from-shell . "melpa")
-        (no-littering         . "melpa")
-        (use-package          . "melpa")))
+        (no-littering         . "melpa")))
 
 ;; Refresh package archive contents only if it's empty.
 ;; If you need to update packages, do it manually.
