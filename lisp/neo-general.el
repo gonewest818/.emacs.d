@@ -34,3 +34,23 @@
 ;; Dired configuration
 ;; See https://www.emacswiki.org/emacs/DiredReuseDirectoryBuffer
 (put 'dired-find-alternate-file 'disabled nil)
+
+(use-package casual
+  :ensure t
+  :config
+  (require 'casual-calc)
+  (require 'casual-dired)
+  (require 'casual-ibuffer)
+  (require 'casual-info)
+  :bind (:map calc-mode-map
+         ("C-o" . 'casual-calc-tmenu)
+         :map dired-mode-map
+         ("C-o" . 'casual-dired-tmenu)
+         ("s"   . 'casual-dired-sort-by-tmenu)
+         ("/"   . 'casual-dired-search-replace-tmenu)
+         :map ibuffer-mode-map
+         ("C-o" . 'casual-ibuffer-tmenu)
+         ("F"   . 'casual-ibuffer-filter-tmenu)
+         ("s"   . 'casual-ibuffer-sortby-tmenu)
+         :map Info-mode-map
+         ("C-o" . 'casual-info-tmenu)))
