@@ -107,6 +107,34 @@
 ;; Winner mode allows layout undo [C-c left] & redo [C-c right]
 (winner-mode t)
 
+;; Toggle horizontal to vertical split
+(defun neo-toggle-window-split ()
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((this-win-buffer (window-buffer))
+         (next-win-buffer (window-buffer (next-window)))
+         (this-win-edges (window-edges (selected-window)))
+         (next-win-edges (window-edges (next-window)))
+         (this-win-2nd (not (and (<= (car this-win-edges)
+                     (car next-win-edges))
+                     (<= (cadr this-win-edges)
+                     (cadr next-win-edges)))))
+         (splitter
+          (if (= (car this-win-edges)
+             (car (window-edges (next-window))))
+          'split-window-horizontally
+        'split-window-vertically)))
+    (delete-other-windows)
+    (let ((first-win (selected-window)))
+      (funcall splitter)
+      (if this-win-2nd (other-window 1))
+      (set-window-buffer (selected-window) this-win-buffer)
+      (set-window-buffer (next-window) next-win-buffer)
+      (select-window first-win)
+      (if this-win-2nd (other-window 1))))))
+
+(global-set-key (kbd "C-x |") 'neo-toggle-window-split)
+
 (defun neo-terminal-visible-bell ()
   "A friendlier visual bell effect."
   (invert-face 'mode-line)
@@ -131,5 +159,5 @@
   (interactive)
   (other-window -1))
 
-(global-set-key (kbd "C-<tab>")   'other-window)
-(global-set-key (kbd "C-S-<tab>") 'neo-other-window-rev)
+(global-set-key (kbd "M-<tab>")   'other-window)
+(global-set-key (kbd "M-S-<tab>") 'neo-other-window-rev)
