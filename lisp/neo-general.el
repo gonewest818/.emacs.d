@@ -10,7 +10,10 @@
 
 (use-package quelpa-use-package
   :ensure t
-  :after quelpa)
+  :after quelpa
+  :init
+  (setq quelpa-update-melpa-p nil)
+  (setq quelpa-self-upgrade-p nil))
 
 (set-language-environment "UTF-8")
 
