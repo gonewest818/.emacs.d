@@ -34,3 +34,6 @@
 ;; Dired configuration
 ;; See https://www.emacswiki.org/emacs/DiredReuseDirectoryBuffer
 (put 'dired-find-alternate-file 'disabled nil)
+
+;; Native comp warnings
+(setq warning-minimum-level :error)
