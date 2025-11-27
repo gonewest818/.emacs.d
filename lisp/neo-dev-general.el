@@ -9,6 +9,10 @@
   :config (setq docker-command "podman"
                 docker-compose-command "podman-compose"))
 
+(use-package dockerfile-mode
+  :ensure t
+  :config (setq dockerfile-mode-command "podman"))
+
 (use-package magit
   :ensure t
   :pin melpa

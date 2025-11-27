@@ -111,6 +111,34 @@
 ;; Winner mode allows layout undo [C-c left] & redo [C-c right]
 (winner-mode t)
 
+;; Toggle horizontal to vertical split
+(defun neo-toggle-window-split ()
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((this-win-buffer (window-buffer))
+         (next-win-buffer (window-buffer (next-window)))
+         (this-win-edges (window-edges (selected-window)))
+         (next-win-edges (window-edges (next-window)))
+         (this-win-2nd (not (and (<= (car this-win-edges)
+                     (car next-win-edges))
+                     (<= (cadr this-win-edges)
+                     (cadr next-win-edges)))))
+         (splitter
+          (if (= (car this-win-edges)
+             (car (window-edges (next-window))))
+          'split-window-horizontally
+        'split-window-vertically)))
+    (delete-other-windows)
+    (let ((first-win (selected-window)))
+      (funcall splitter)
+      (if this-win-2nd (other-window 1))
+      (set-window-buffer (selected-window) this-win-buffer)
+      (set-window-buffer (next-window) next-win-buffer)
+      (select-window first-win)
+      (if this-win-2nd (other-window 1))))))
+
+(global-set-key (kbd "C-x |") 'neo-toggle-window-split)
+
 (defun neo-terminal-visible-bell ()
   "A friendlier visual bell effect."
   (invert-face 'mode-line)
@@ -124,8 +152,8 @@
   (progn ;; pixel scroll supported since 29.1
     (setq mouse-wheel-scroll-amount '(0.1 ((shift) . 0.1))) ;; fractional lines
     (pixel-scroll-precision-mode 1)
-    (setq pixel-scroll-precision-use-momentum t)))
-(setq mouse-wheel-progressive-speed nil) ;; do/don't accelerate scrolling
+    (setq pixel-scroll-precision-use-momentum nil)))
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 
@@ -135,5 +163,5 @@
   (interactive)
   (other-window -1))
 
-(global-set-key (kbd "C-<tab>")   'other-window)
-(global-set-key (kbd "C-S-<tab>") 'neo-other-window-rev)
+(global-set-key (kbd "M-<tab>")   'other-window)
+(global-set-key (kbd "M-S-<tab>") 'neo-other-window-rev)
