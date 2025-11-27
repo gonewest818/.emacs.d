@@ -100,9 +100,13 @@
 (global-hl-line-mode)                   ; highlight current line
 
 ;; Configure new frames
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(width . 150))
+(add-to-list 'default-frame-alist '(height . 60))
+(add-to-list 'default-frame-alist '(user-size . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
-(add-to-list 'default-frame-alist '(font . "Inconsolata-12"))
+(add-to-list 'default-frame-alist '(font . "Inconsolata-14"))
+(setq frame-resize-pixelwise t)
 
 ;; Winner mode allows layout undo [C-c left] & redo [C-c right]
 (winner-mode t)
