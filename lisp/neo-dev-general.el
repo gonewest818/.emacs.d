@@ -1,6 +1,45 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GENERAL DEVELOPMENT
 
+(use-package gptel
+  :ensure t
+  :config
+  (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
+  (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
+  (setq-default
+   gptel-model 'openai/gpt-oss-20b:free
+   gptel-backend (gptel-make-openai "OpenRouter"
+                   :host "openrouter.ai"
+                   :endpoint "/api/v1/chat/completions"
+                   :stream t
+                   :key (lambda () (auth-source-pick-first-password
+                                    :host "openrouter.ai"
+                                    :user "neil.okamoto@gmail.com"))
+                   :models '(openai/gpt-oss-20b:free
+                             anthropic/claude-sonnet-4.5
+                             anthropic/claude-3.7-sonnet))))
+
+(use-package aidermacs
+  ;; also need aider installed:
+  ;;   pip install aider-install
+  ;;   aider-install
+  :ensure t
+  :pin melpa-stable
+  :bind (("C-c v" . aidermacs-transient-menu))
+  :config
+  (defun neo-set-openrouter-key ()
+   "Set OPENROUTER_API_KEY environment variable from auth-source."
+   (unless (getenv "OPENROUTER_API_KEY")
+      (setenv "OPENROUTER_API_KEY"
+               (auth-source-pick-first-password
+                :host "openrouter.ai"
+                :user "neil.okamoto@gmail.com"))))
+   (advice-add 'aidermacs-transient-menu :before #'neo-set-openrouter-key)
+  :custom
+  (aidermacs-program "aider")
+  (aidermacs-default-chat-mode 'architect)
+  (aidermacs-default-model "openrouter/anthropic/claude-sonnet-4"))
+
 (use-package docker
   :ensure t
   :pin melpa
