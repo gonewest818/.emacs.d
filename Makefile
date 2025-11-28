@@ -17,5 +17,5 @@ clean:
 	rm -rf $(filter-out $(PRESERVE), $(GITIGNORE))
 
 init:
-	$(EMACS) --batch -q -l ~/.emacs.d/init.el  \
+	$(EMACS) --batch -l early-init.el -l init.el  \
                  --eval="(message \"*****\n%s\n*****\n\" (emacs-version))"

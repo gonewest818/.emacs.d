@@ -43,10 +43,7 @@
 ;; NO-LITTERING (https://github.com/emacscollective/no-littering)
 
 (require 'no-littering)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; CUSTOM
-
+(no-littering-theme-backups)
 (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
 (when (file-readable-p custom-file) (load custom-file))
 
