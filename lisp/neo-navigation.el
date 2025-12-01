@@ -45,8 +45,11 @@
   (setq projectile-completion-system 'ivy)
   (setq projectile-sort-order 'recently-active)
   (setq projectile-project-search-path
-        (append '("~" "~/work")
-                (file-expand-wildcards "~/work/[a-z0-9]*")))
+        (if neo-config-for-df
+            (append '("~"  "~/work" "~/work/mousetrap" "~/work/opensource" "~/work/github")
+                    (file-expand-wildcards "~/work/[a-z0-9]*"))
+          (append '("~" "~/work")
+                  (file-expand-wildcards "~/work/[a-z0-9]*"))))
   (setq projectile-project-root-functions
         '(projectile-root-local
           projectile-root-top-down

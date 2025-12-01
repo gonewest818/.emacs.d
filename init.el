@@ -63,10 +63,15 @@
   (exec-path-from-shell-initialize))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; AUTH-SOURCE AND GNUPG
+ ;; AUTH-SOURCE AND GNUPG
 
-;;(setq auth-source-debug t)
-(setq auth-sources '((:source "~/.authinfo.gpg")))
+(setq neo-config-for-df
+      (file-exists-p (no-littering-expand-etc-file-name "config-for-df")))
+(if neo-config-for-df
+    (progn
+      (require 'auth-source-pass)
+      (auth-source-pass-enable))
+  (setq auth-sources '((:source "~/.authinfo.gpg"))))
 (setq epa-pinentry-mode 'loopback)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
