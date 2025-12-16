@@ -160,5 +160,11 @@
 (show-paren-mode 1)                     ; visualize matching parens
 (electric-pair-mode 1)                  ; insert matching brackets
 
+;; open .env files in sh-mode
+(setq auto-mode-alist
+      (append '(("\\.env\\'" . sh-mode)
+                ("\\.env\\.tmpl\\'" . sh-mode))
+              auto-mode-alist))
+
 (setq-default comment-column 60)
 (setq enable-local-eval t)              ; necessary evil, using eval forms in .dir-locals.el
