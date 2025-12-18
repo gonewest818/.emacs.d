@@ -68,20 +68,26 @@
   :pin melpa
   :after magit)
 
+(use-package envrc
+  :ensure t
+  :hook ((after-init . envrc-global-mode)))
+
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
 
+(use-package yasnippet
+  :ensure t
+  :hook (prog-mode . yas-minor-mode))
+
 (use-package lsp-mode
   :ensure t
-  :after cmake-mode
-  :hook ((c++-mode . lsp)
-         (cmake-mode . lsp)
+  :hook ((python-mode . lsp-deferred)
+         (cmake-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :config
   (setq lsp-prefer-flymake nil
-        lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd"
-        lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
+        lsp-log-io t))
 
 (use-package lsp-ui
   :ensure t
@@ -123,12 +129,13 @@
 
 (use-package terraform-mode
   :ensure t
+  :after lsp-mode
   :mode (("\\.tf\\'"     . terraform-mode)
          ("\\.tfvars\\'" . terraform-mode))
   :hook (terraform-mode . lsp)
   :config
   (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("/usr/local/bin/terraform-ls" "serve"))
+   (make-lsp-client :new-connection (lsp-stdio-connection '("terraform-ls" "serve"))
                     :major-modes '(terraform-mode)
                     :server-id 'terraform-)))
 
