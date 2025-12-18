@@ -1,5 +1,11 @@
 (require 'package)
 
+;; Restore GC settings
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold 16777216
+                  gc-cons-percentage 0.1)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PACKAGE INITIALIZATION
 
@@ -10,16 +16,26 @@
 (add-to-list 'package-archives
              '("melpa"        . "https://melpa.org/packages/") t)
 
-;; See Stack Overflow [http://bit.ly/2tu5N8s] 
-(setq package-enable-at-startup nil)
 (package-initialize)
+
+;; Install no-littering first
+(unless (package-installed-p 'no-littering)
+  (package-refresh-contents)
+  (package-install 'no-littering))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; NO-LITTERING (https://github.com/emacscollective/no-littering)
+
+(require 'no-littering)
+(no-littering-theme-backups)
+(setq custom-file (no-littering-expand-etc-file-name "custom.el"))
+(when (file-readable-p custom-file) (load custom-file))
 
 ;; Packages with preferred repo
 (setq package-pinned-packages
       '((bind-key             . "melpa")
         (diminish             . "melpa")
-        (exec-path-from-shell . "melpa")
-        (no-littering         . "melpa")))
+        (exec-path-from-shell . "melpa")))
 
 ;; Refresh package archive contents only if it's empty.
 ;; If you need to update packages, do it manually.
@@ -38,14 +54,6 @@
 (setq  use-package-compute-statistics t)
 (require 'diminish)
 (require 'bind-key)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; NO-LITTERING (https://github.com/emacscollective/no-littering)
-
-(require 'no-littering)
-(no-littering-theme-backups)
-(setq custom-file (no-littering-expand-etc-file-name "custom.el"))
-(when (file-readable-p custom-file) (load custom-file))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PATH MANIPULATION
