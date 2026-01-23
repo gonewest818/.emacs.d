@@ -55,6 +55,7 @@
           projectile-root-top-down
           projectile-root-top-down-recurring
           projectile-root-bottom-up))
+  (setq projectile-switch-project-action #'projectile-dired)
   (projectile-global-mode 1))
 
 (use-package projectile-ripgrep
