@@ -46,12 +46,12 @@
   (setq projectile-sort-order 'recently-active)
   (setq projectile-project-search-path
         (if neo-config-for-df
-            (append '("~"  "~/work" "~/work/mousetrap" "~/work/opensource" "~/work/github")
-                    (file-expand-wildcards "~/work/[a-z0-9]*"))
-          (append '("~" "~/work")
-                  (file-expand-wildcards "~/work/[a-z0-9]*"))))
+            '("~/.emacs.d" "~/work"
+              "~/work/mousetrap" "~/work/opensource" "~/work/github")
+          '("~/.emacs.d" "~/work")))
   (setq projectile-project-root-functions
         '(projectile-root-local
+          projectile-root-marked
           projectile-root-top-down
           projectile-root-top-down-recurring
           projectile-root-bottom-up))
