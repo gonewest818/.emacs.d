@@ -102,9 +102,11 @@
   :hook (lsp-mode . lsp-ui-mode)
   :config
   (setq lsp-ui-doc-enable t
-        lsp-ui-doc-use-childframe t
+        lsp-ui-doc-use-childframe nil
         lsp-ui-doc-position 'top
         lsp-ui-doc-include-signature t
+        lsp-ui-doc-show-with-cursor t
+        lsp-ui-doc-show-with-mouse t
         lsp-ui-doc-delay 0.75
         lsp-ui-sideline-enable t
         lsp-ui-sideline-show-hover t
