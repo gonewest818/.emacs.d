@@ -28,13 +28,21 @@
   :bind (("C-c v" . aidermacs-transient-menu))
   :config
   (defun neo-set-openrouter-key ()
-   "Set OPENROUTER_API_KEY environment variable from auth-source."
-   (unless (getenv "OPENROUTER_API_KEY")
+    "Set OPENROUTER_API_KEY environment variable from auth-source."
+    (unless (getenv "OPENROUTER_API_KEY")
       (setenv "OPENROUTER_API_KEY"
-               (auth-source-pick-first-password
-                :host "openrouter.ai"
-                :user "neil.okamoto@gmail.com"))))
-   (advice-add 'aidermacs-transient-menu :before #'neo-set-openrouter-key)
+              (auth-source-pick-first-password
+               :host "openrouter.ai"
+               :user "neil.okamoto@gmail.com"))))
+  (advice-add 'aidermacs-transient-menu :before #'neo-set-openrouter-key)
+  (defun neo-aidermacs-set-buffer-file-name ()
+    "Set the filename on aidermacs buffers to help ibuffer sorting."
+    (when (string-match "^\\*aidermacs:\\(.*\\)\\*$" (buffer-name))
+      (let ((project-path (match-string 1 (buffer-name))))
+        (message "aidermacs project-path is %s" project-path)
+        (setq buffer-file-name project-path))))
+  (add-hook 'aidermacs-mode-hook #'neo-aidermacs-set-buffer-file-name)
+  (setq aidermacs-show-diff-after-change nil)
   :custom
   (aidermacs-program "aider")
   (aidermacs-default-chat-mode 'architect)
