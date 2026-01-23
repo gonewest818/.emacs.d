@@ -57,8 +57,7 @@
          (clojure-mode . paredit-mode)
          (cider-repl-mode . paredit-mode)
          (emacs-lisp-mode . paredit-mode)
-         (lisp-interaction-mode . paredit-mode)
-         (eval-expression-minibuffer-setup . paredit-mode)))
+         (lisp-interaction-mode . paredit-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; FENNEL-LANG DEVELOPMENT
