@@ -86,8 +86,7 @@
          (cmake-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :config
-  (setq lsp-prefer-flymake nil
-        lsp-log-io t))
+  (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui
   :ensure t
