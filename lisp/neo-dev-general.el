@@ -6,6 +6,16 @@
   :config
   (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
   (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
+  (let ((ollama-host (getenv "OLLAMA_API_BASE")))
+    (message "OLLAMA_API_BASE environment variable: %s" ollama-host)
+    (when ollama-host
+      ;; Strip http:// or https:// prefix if present
+      (setq ollama-host (replace-regexp-in-string "^https?://" "" ollama-host))
+      (message "Using Ollama host: %s" ollama-host)
+      (gptel-make-ollama "Ollama"
+        :host ollama-host
+        :stream t
+        :models '("qwen2.5-coder:7b"))))
   (setq-default
    gptel-model 'openai/gpt-oss-20b:free
    gptel-backend (gptel-make-openai "OpenRouter"
@@ -20,9 +30,19 @@
                              anthropic/claude-3.7-sonnet))))
 
 (use-package aidermacs
-  ;; also need aider installed:
-  ;;   pip install aider-install
-  ;;   aider-install
+  ;; need aider installed separately:
+  ;;    pip install aider-install
+  ;;    aider-install
+  ;;
+  ;; export OLLAMA_API_BASE=http://host:11434
+  ;;
+  ;; need a `~/.aider.conf.yml`:
+  ;;    model: openrouter/anthropic/claude-sonnet-4
+  ;;    editor-model: ollama/qwen2.5-coder:7b
+  ;;    weak-model: ollama/qwen2.5-coder:7b
+  ;;    edit-format: diff
+  ;;    auto-commits: false
+  ;;    architect: true
   :ensure t
   :pin melpa-stable
   :bind (("C-c v" . aidermacs-transient-menu))
@@ -35,18 +55,9 @@
                :host "openrouter.ai"
                :user "neil.okamoto@gmail.com"))))
   (advice-add 'aidermacs-transient-menu :before #'neo-set-openrouter-key)
-  (defun neo-aidermacs-set-buffer-file-name ()
-    "Set the filename on aidermacs buffers to help ibuffer sorting."
-    (when (string-match "^\\*aidermacs:\\(.*\\)\\*$" (buffer-name))
-      (let ((project-path (match-string 1 (buffer-name))))
-        (message "aidermacs project-path is %s" project-path)
-        (setq buffer-file-name project-path))))
-  (add-hook 'aidermacs-mode-hook #'neo-aidermacs-set-buffer-file-name)
   (setq aidermacs-show-diff-after-change nil)
   :custom
-  (aidermacs-program "aider")
-  (aidermacs-default-chat-mode 'architect)
-  (aidermacs-default-model "openrouter/anthropic/claude-sonnet-4"))
+  (aidermacs-program "aider"))
 
 (use-package docker
   :ensure t
