@@ -47,14 +47,14 @@
   :pin melpa-stable
   :bind (("C-c v" . aidermacs-transient-menu))
   :config
-  (defun neo-set-openrouter-key ()
+  (defun neo/aidermacs--set-openrouter-key ()
     "Set OPENROUTER_API_KEY environment variable from auth-source."
     (unless (getenv "OPENROUTER_API_KEY")
       (setenv "OPENROUTER_API_KEY"
               (auth-source-pick-first-password
                :host "openrouter.ai"
                :user "neil.okamoto@gmail.com"))))
-  (advice-add 'aidermacs-transient-menu :before #'neo-set-openrouter-key)
+  (advice-add 'aidermacs-transient-menu :before #'neo/aidermacs--set-openrouter-key)
   (setq aidermacs-show-diff-after-change nil)
   :custom
   (aidermacs-program "aider"))

@@ -69,10 +69,36 @@
   :init
   (setq ibuffer-expert t)
   (setq ibuffer-show-empty-filter-groups nil)
-
+  ;; Group non-file buffers via their default-directory
+  (defvar neo/ibuffer-projectile-nonfile-allowlist-regexps
+    '("\\`\\*aidermacs:.*\\*\\'"          ; *aidermacs:{path}*
+      ;; add your own patterns here, e.g.:
+      ;; "\\`\\*eglot.*\\*\\'"
+      ;; "\\`\\*lsp-.*\\*\\'"
+      )
+    "Regexps of non-file buffer names allowed to be grouped by projectile.")
+  (defun neo/ibuffer-projectile--allowed-nonfile-buffer-p (buf)
+    (let ((name (buffer-name buf)))
+      (seq-some (lambda (re) (string-match-p re name))
+                neo/ibuffer-projectile-nonfile-allowlist-regexps)))
+  (defun neo/ibuffer-projectile-root--fallback-with-allowlist (orig buf)
+    "Let ibuffer-projectile group allowlisted non-file buffers via `default-directory`."
+    (or (funcall orig buf)
+        (when (neo/ibuffer-projectile--allowed-nonfile-buffer-p buf)
+          (with-current-buffer buf
+            (when (and default-directory (file-directory-p default-directory))
+              (let ((root (ignore-errors
+                            (let ((default-directory default-directory))
+                              (projectile-project-root)))))
+                (when root
+                  (cons (let ((default-directory root))
+                          (projectile-project-name))
+                        root))))))))
+  (advice-add 'ibuffer-projectile-root :around
+              #'neo/ibuffer-projectile-root--fallback-with-allowlist)
   ;; Works similarly to the ibuffer-projectile default, but we have a
   ;; few more custom filter groups we want to concatenate to the list.
-  (defun neo-set-filter-groups ()
+  (defun neo/ibuffer-projectile--set-filter-groups ()
     (interactive)
     (setq ibuffer-filter-groups
           (nconc (ibuffer-projectile-generate-filter-groups)
@@ -89,7 +115,7 @@
         (with-current-buffer ibuf
           (pop-to-buffer ibuf)
           (ibuffer-update nil t)))))
-  (add-hook 'ibuffer-hook #'neo-set-filter-groups))
+  (add-hook 'ibuffer-hook #'neo/ibuffer-projectile--set-filter-groups))
 
 (use-package avy
   :ensure t
