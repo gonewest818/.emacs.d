@@ -72,6 +72,7 @@
   ;; Group non-file buffers via their default-directory
   (defvar neo/ibuffer-projectile-nonfile-allowlist-regexps
     '("\\`\\*aidermacs:.*\\*\\'"          ; *aidermacs:{path}*
+      "\\`OpenCode Agent @ \\S-+\\'"      ; OpenCode Agent @ {path}
       ;; add your own patterns here, e.g.:
       ;; "\\`\\*eglot.*\\*\\'"
       ;; "\\`\\*lsp-.*\\*\\'"
