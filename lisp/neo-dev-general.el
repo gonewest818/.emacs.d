@@ -1,10 +1,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GENERAL DEVELOPMENT
 
-(defvar neo/openrouter-api-key
+(defun neo/get-openrouter-api-key ()
+  "Retrieve API key for openrouter.ai from auth-source."
   (auth-source-pick-first-password :host "openrouter.ai"
-                                   :user "neil.okamoto@gmail.com")
-  "API key for openrouter.ai, retrieved once from auth-source.")
+                                   :user "neil.okamoto@gmail.com"))
 
 (defvar neo/ollama-api-base
   (let ((api-base (getenv "OLLAMA_API_BASE")))
@@ -23,16 +23,16 @@
   (gptel-make-ollama "Ollama"
     :host neo/ollama-host
     :stream t
-    :models '("qwen2.5-coder:7b"))
+    :models '("qwen2.5-coder:7b" "qwen3-coder-30b-128kctx"))
   (setq-default
    gptel-model 'anthropic/claude-sonnet-4.6
    gptel-backend (gptel-make-openai "OpenRouter"
                    :host "openrouter.ai"
                    :endpoint "/api/v1/chat/completions"
                    :stream t
-                   :key (lambda () neo/openrouter-api-key)
+                   :key (lambda () (neo/get-openrouter-api-key))
                    :models '(anthropic/claude-sonnet-4.6
-                             anthropic/claude-3.7-sonnet))))
+                             google/gemini-3-flash-preview))))
 
 (use-package agent-shell
     :ensure t
@@ -41,16 +41,25 @@
     ;; ((opencode . "brew install anomalyco/tap/opencode"))
     :config
     (setq agent-shell-preferred-agent-config 'opencode
-          agent-shell-opencode-environment
-          (agent-shell-make-environment-variables
-           "OPENROUTER_API_KEY" neo/openrouter-api-key)
-          agent-shell-opencode-default-model-id "openrouter/anthropic/claude-sonnet-4.6"
-          agent-shell-opencode-default-session-mode-id "plan"))
+          ;; select models after connecting with c-c c-v
+          ;; ollama models configured in ~/.config/opencode/opencode.json
+          ;; ... or pick one explicitly
+          ;; agent-shell-opencode-default-model-id "openrouter/anthropic/claude-sonnet-4.6"
+          agent-shell-opencode-default-session-mode-id "plan")
+    (defun neo/agent-shell--set-opencode-env (&rest _)
+      "Set OpenCode environment with OPENROUTER_API_KEY lazily."
+      (setq agent-shell-opencode-environment
+            (agent-shell-make-environment-variables
+             "OPENROUTER_API_KEY" (neo/get-openrouter-api-key))))
+    (advice-add 'agent-shell :before #'neo/agent-shell--set-opencode-env))
 
 (use-package aidermacs
   ;; need aider installed separately:
   ;;    pip install aider-install
   ;;    aider-install
+  ;; or
+  ;;    uv tool install aider-chat --python 3.12
+  ;;    uv tool install aider-skills --python 3.12
   ;;
   ;; export OLLAMA_API_BASE=http://host:11434
   ;;
@@ -60,15 +69,15 @@
   ;;    weak-model: ollama/qwen2.5-coder:7b
   ;;    edit-format: diff
   ;;    auto-commits: false
-  ;;    architect: true
   :ensure t
   :pin melpa-stable
   :bind (("C-c v" . aidermacs-transient-menu))
   :config
   (defun neo/aidermacs--set-openrouter-key ()
     "Set OPENROUTER_API_KEY environment variable from auth-source."
-    (when neo/openrouter-api-key
-      (setenv "OPENROUTER_API_KEY" neo/openrouter-api-key)))
+    (let ((api-key (neo/get-openrouter-api-key)))
+      (when api-key
+        (setenv "OPENROUTER_API_KEY" api-key))))
   (advice-add 'aidermacs-transient-menu :before #'neo/aidermacs--set-openrouter-key)
   (setq aidermacs-show-diff-after-change nil)
   :custom
