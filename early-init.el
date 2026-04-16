@@ -18,10 +18,15 @@
 (when (and (fboundp 'startup-redirect-eln-cache)
            (fboundp 'native-comp-available-p)
            (native-comp-available-p))
+  (load (expand-file-name "etc/native-comp-exclusions.el" user-emacs-directory) nil t)
+  (setq native-comp-async-report-warnings-errors 'silent)
+  (setq native-comp-jit-compilation-deny-list
+        (append (if (boundp 'neo-native-comp-exclusion-regexps)
+                    neo-native-comp-exclusion-regexps
+                  nil)
+                (if (boundp 'native-comp-jit-compilation-deny-list)
+                    native-comp-jit-compilation-deny-list
+                  nil)))
   (startup-redirect-eln-cache
    (convert-standard-filename
-    (expand-file-name  "var/eln-cache/" user-emacs-directory)))
-  ;; Put primitive-call trampolines under var/ too; otherwise Emacs may
-  ;; recreate ~/.emacs.d/eln-cache for these generated .eln files.
-  (setq native-comp-enable-subr-trampolines
-        (expand-file-name "var/eln-cache/trampolines/" user-emacs-directory)))
+     (expand-file-name "var/eln-cache/" user-emacs-directory))))

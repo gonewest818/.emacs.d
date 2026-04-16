@@ -1,8 +1,8 @@
+.aider*
+.agent-shell/
+.cask/
 dev/
+etc/config-for-df
 elpa/
 var/
-.cask/
-.aider*
-/.agent-shell/
-/etc/config-for-df
 
