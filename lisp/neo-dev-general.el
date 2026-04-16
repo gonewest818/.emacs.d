@@ -37,8 +37,13 @@
 (use-package agent-shell
     :ensure t
     :pin melpa
+    :init
+    (setq shell-maker-root-path
+          (no-littering-expand-var-file-name "shell-maker/"))
+    :bind (("C-c b" . agent-shell))
     ;; :ensure-system-package
-    ;; ((opencode . "brew install anomalyco/tap/opencode"))
+    ;; ((opencode . "brew install anomalyco/tap/opencode")
+    ;;  (tokenscope . "npm install -g @ramtinj95/opencode-tokenscope"))
     :config
     (setq agent-shell-preferred-agent-config 'opencode
           ;; select models after connecting with c-c c-v

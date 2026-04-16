@@ -1,5 +1,9 @@
 (require 'package)
 
+;; Put Custom writes under etc/ before package bootstrap can write.
+(setq custom-file (expand-file-name "etc/custom.el" user-emacs-directory))
+(when (file-readable-p custom-file) (load custom-file))
+
 ;; Restore GC settings
 (add-hook 'emacs-startup-hook
           (lambda ()
@@ -29,7 +33,6 @@
 (require 'no-littering)
 (no-littering-theme-backups)
 (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
-(when (file-readable-p custom-file) (load custom-file))
 
 ;; Packages with preferred repo
 (setq package-pinned-packages

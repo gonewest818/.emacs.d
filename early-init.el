@@ -20,5 +20,8 @@
            (native-comp-available-p))
   (startup-redirect-eln-cache
    (convert-standard-filename
-    (expand-file-name  "var/eln-cache/" user-emacs-directory))))
-
+    (expand-file-name  "var/eln-cache/" user-emacs-directory)))
+  ;; Put primitive-call trampolines under var/ too; otherwise Emacs may
+  ;; recreate ~/.emacs.d/eln-cache for these generated .eln files.
+  (setq native-comp-enable-subr-trampolines
+        (expand-file-name "var/eln-cache/trampolines/" user-emacs-directory)))

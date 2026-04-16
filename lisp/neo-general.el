@@ -2,7 +2,11 @@
 ;; GENERAL SETTINGS
 
 (use-package better-defaults
-  :ensure t)
+  :ensure t
+  :config
+  ;; better-defaults resets `custom-file' to ~/.emacs.d/custom.el.
+  ;; Restore the no-littering location after it loads.
+  (setq custom-file (no-littering-expand-etc-file-name "custom.el")))
 
 (use-package quelpa
   :ensure t

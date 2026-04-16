@@ -4,3 +4,5 @@ var/
 .cask/
 .aider*
 /.agent-shell/
+/etc/config-for-df
+
