@@ -128,37 +128,32 @@
   :ensure t
   :hook (prog-mode . yas-minor-mode))
 
-(use-package lsp-mode
+(use-package eglot
   :ensure t
-  :hook ((python-mode . lsp-deferred)
-         (cmake-mode . lsp-deferred)
-         (lsp-mode . lsp-enable-which-key-integration))
-  :config
-  (setq lsp-prefer-flymake nil))
+  :hook ((python-mode . eglot-ensure)      ; ty
+         (cmake-mode . eglot-ensure)       ; cmake-language-server
+         (markdown-mode . eglot-ensure)    ; marksman
+         (terraform-mode . eglot-ensure)   ; terraform-ls
+         (sh-mode . eglot-ensure)          ; bash-language-server
+         (bash-ts-mode . eglot-ensure)))   ; bash-language-server
 
-(use-package lsp-ui
+;; Language server registrations are centralized here so eglot setup stays auditable.
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(python-mode . ("ty" "server")))
+  (add-to-list 'eglot-server-programs
+               '(markdown-mode . ("marksman" "server")))
+  (add-to-list 'eglot-server-programs
+               '(terraform-mode . ("terraform-ls" "serve")))
+  (add-to-list 'eglot-server-programs
+               '((sh-mode bash-ts-mode) . ("bash-language-server" "start"))))
+
+(use-package eldoc-box
   :ensure t
-  :requires lsp-mode flycheck
-  :hook (lsp-mode . lsp-ui-mode)
+  :hook (eglot-managed-mode . eldoc-box-hover-mode)
   :config
-  (setq lsp-ui-doc-enable t
-        lsp-ui-doc-use-childframe nil
-        lsp-ui-doc-position 'top
-        lsp-ui-doc-include-signature t
-        lsp-ui-doc-show-with-cursor t
-        lsp-ui-doc-show-with-mouse t
-        lsp-ui-doc-delay 0.75
-        lsp-ui-sideline-enable t
-        lsp-ui-sideline-show-hover t
-        lsp-ui-sideline-show-code-actions t
-        lsp-ui-sideline-show-symbol t
-        lsp-ui-sideline-show-diagnostics t
-        lsp-ui-flycheck-enable t
-        lsp-ui-flycheck-list-position 'right
-        lsp-ui-flycheck-live-reporting t
-        lsp-ui-peek-enable t
-        lsp-ui-peek-list-width 60
-        lsp-ui-peek-peek-height 25))
+  (setq eldoc-box-show-with-cursor t
+        eldoc-box-show-with-mouse t))
 
 (use-package cmake-mode
   :ensure t
@@ -178,20 +173,8 @@
 
 (use-package terraform-mode
   :ensure t
-  :after lsp-mode
   :mode (("\\.tf\\'"     . terraform-mode)
-         ("\\.tfvars\\'" . terraform-mode))
-  :hook (terraform-mode . lsp)
-  :config
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("terraform-ls" "serve"))
-                    :major-modes '(terraform-mode)
-                    :server-id 'terraform-)))
-
-(use-package company-terraform
-  :ensure t
-  :after company
-  :config (company-terraform-init))
+         ("\\.tfvars\\'" . terraform-mode)))
 
 (use-package markdown-mode
   :ensure t

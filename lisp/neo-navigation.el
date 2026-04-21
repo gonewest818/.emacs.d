@@ -73,9 +73,6 @@
   (defvar neo/ibuffer-projectile-nonfile-allowlist-regexps
     '("\\`\\*aidermacs:.*\\*\\'"          ; *aidermacs:{path}*
       "\\`OpenCode Agent @ \\S-+\\'"      ; OpenCode Agent @ {path}
-      ;; add your own patterns here, e.g.:
-      ;; "\\`\\*eglot.*\\*\\'"
-      ;; "\\`\\*lsp-.*\\*\\'"
       )
     "Regexps of non-file buffer names allowed to be grouped by projectile.")
   (defun neo/ibuffer-projectile--allowed-nonfile-buffer-p (buf)
