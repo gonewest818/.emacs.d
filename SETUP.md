@@ -13,7 +13,9 @@ This is a machine setup checklist for the current Emacs configuration.
 - [ ] `podman`
 - [ ] `podman-compose`
 - [ ] `ty`
+- [ ] `marksman`
 - [ ] `terraform-ls`
+- [ ] `bash-language-server`
 - [ ] `cmake-language-server`
 
 ## Required By Current Emacs Config
@@ -29,7 +31,7 @@ This is a machine setup checklist for the current Emacs configuration.
 
 ### Python
 
-- [ ] `python`
+- [ ] a project Python interpreter, usually selected through `direnv` + `envrc`
 - [ ] `debugpy`
 
 ### Clojure
@@ -54,8 +56,11 @@ This is a machine setup checklist for the current Emacs configuration.
 - `flyspell` needs an external spell checker such as `aspell` or `hunspell`.
 - Terraform completion, hover, and diagnostics come from `terraform-ls` through `eglot`.
 - Python completion, hover, and diagnostics come from `ty` through `eglot`.
+- Markdown completion, hover, and diagnostics come from `marksman` through `eglot`.
+- Shell and Bash completion, hover, and diagnostics come from `bash-language-server` through `eglot`.
 - CMake support uses `eglot` with `cmake-language-server` on `PATH`.
-- `dap-mode` is still present, so Python debugging currently depends on `debugpy`.
+- Python debugging uses `dape`, which runs `python -m debugpy.adapter` in the
+  current Emacs environment.
 
 ## Current Install Status On This Mac
 
@@ -71,7 +76,9 @@ This is a machine setup checklist for the current Emacs configuration.
 - `podman` at `/opt/homebrew/bin/podman`
 - `podman-compose` at `/opt/homebrew/bin/podman-compose`
 - `ty` at `/opt/homebrew/bin/ty`
+- `marksman` at `/opt/homebrew/bin/marksman`
 - `terraform-ls` at `/opt/homebrew/bin/terraform-ls`
+- `bash-language-server` at `/opt/homebrew/bin/bash-language-server`
 - `opencode` at `/opt/homebrew/bin/opencode`
 - `pass` is installed via Homebrew
 - Python is available as `python3` at `/opt/homebrew/bin/python3`
@@ -93,10 +100,8 @@ This is a machine setup checklist for the current Emacs configuration.
 ### Not Currently Found
 
 - `multimarkdown`
-- `python` (plain `python` is not on `PATH`; use `python3`)
 - `debugpy`
 - `lein`
-- `pipx`
 
 ### Source Still To Confirm
 
