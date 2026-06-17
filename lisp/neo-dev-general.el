@@ -150,7 +150,7 @@
 
 (use-package eldoc-box
   :ensure t
-  :hook (eglot-managed-mode . eldoc-box-hover-mode)
+  :hook (eglot-managed-mode . eldoc-box-hover-at-point-mode)
   :config
   (setq eldoc-box-show-with-cursor t
         eldoc-box-show-with-mouse t))
