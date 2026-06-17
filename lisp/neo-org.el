@@ -48,6 +48,11 @@
   :bind (("C-c il" . org-web-tools-insert-link-for-url)
          ("C-c ie" . org-web-tools-insert-web-page-as-entry)))
 
+(use-package verb
+  :ensure t
+  :after org
+  :config (define-key org-mode-map (kbd "C-c C-r") verb-command-map))
+
 (use-package ox-md
   :after ox)
 
