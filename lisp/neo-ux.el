@@ -72,13 +72,13 @@
        ((t (:background ,zenburn-red-3 :bold t))))
      ;; modeline customizations
      `(mode-line
-       ((,class (:box (:line-width 1 :color ,zenburn-bg-2)
-                      :foreground ,zenburn-green+1
-                      :background ,zenburn-bg-1))))
+       ((t (:box (:line-width 1 :color ,zenburn-bg-2)
+                 :foreground ,zenburn-green+1
+                 :background ,zenburn-bg-1))))
      `(mode-line-inactive
-       ((,class (:box (:line-width 1 :color ,zenburn-bg-1)
-                      :foreground ,zenburn-green-1
-                      :background ,zenburn-bg-05)))))))
+       ((t (:box (:line-width 1 :color ,zenburn-bg-1)
+                 :foreground ,zenburn-green-1
+                 :background ,zenburn-bg-05)))))))
 
 (use-package which-key
   :ensure t
