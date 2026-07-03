@@ -12,6 +12,7 @@
   (setq org-refile-targets
         '((nil :maxlevel . 2)
           (org-agenda-files :maxlevel . 2)))
+  (setq org-id-link-to-org-use-id 'create-if-interactive)
   (setq org-highest-priority ?A
         org-lowest-priority  ?D
         org-default-priority ?C)
@@ -31,17 +32,16 @@
 
 (use-package org-super-agenda
   :ensure t
-  :after org
+  :after org-agenda
   :config
   (setq org-super-agenda-groups
         '((:name "Today" :time-grid t)
           (:name "Important" :priority "A")
           (:name "Next" :priority<= "B")
-          (:todo "IN-PROGRESS" :order 1)
-          (:todo "SCHEDULED" :order 2)
-          (:tag "job" :order 3)
-          (:tag "personal" :order 4)))
-  (org-super-agenda-mode 1))
+          (:name "In Progress" :todo "IN-PROGRESS")
+          (:name "Job" :tag "job")
+          (:name "Personal" :tag "personal")))
+  (org-super-agenda-mode))
 
 (use-package org-web-tools
   :ensure t
@@ -52,9 +52,6 @@
   :ensure t
   :after org
   :config (define-key org-mode-map (kbd "C-c C-r") verb-command-map))
-
-(use-package ox-md
-  :after ox)
 
 (use-package ox-hugo
   :ensure t
