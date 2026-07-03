@@ -6,33 +6,25 @@
   (auth-source-pick-first-password :host "openrouter.ai"
                                    :user "neil.okamoto@gmail.com"))
 
-(defvar neo/ollama-api-base
-  (let ((api-base (getenv "OLLAMA_API_BASE")))
-    (or api-base "http://localhost:11434"))
-  "Base URL for our ollama server, i.e. http://localhost:11434")
-
-(defvar neo/ollama-host
-  (replace-regexp-in-string "^https?://" "" neo/ollama-api-base)
-  "Host and port for the ollama server, i.e. localhost:11434")
-
 (use-package gptel
   :ensure t
   :config
   (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
   (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
-  (gptel-make-ollama "Ollama"
-    :host neo/ollama-host
-    :stream t
-    :models '("qwen2.5-coder:7b" "qwen3-coder-30b-128kctx"))
+  (gptel-make-openai-oauth "ChatGPT")
   (setq-default
-   gptel-model 'anthropic/claude-sonnet-4.6
-   gptel-backend (gptel-make-openai "OpenRouter"
-                   :host "openrouter.ai"
-                   :endpoint "/api/v1/chat/completions"
-                   :stream t
-                   :key (lambda () (neo/get-openrouter-api-key))
-                   :models '(anthropic/claude-sonnet-4.6
-                             google/gemini-3-flash-preview))))
+   gptel-model 'gpt-5.4-mini
+   gptel-backend (gptel-make-openai-oauth "ChatGPT"))
+  (gptel-make-openai "OpenRouter"
+    :host "openrouter.ai"
+    :endpoint "/api/v1/chat/completions"
+    :stream t
+    :key (lambda () (neo/get-openrouter-api-key))
+    :models '(deepseek/deepseek-v4-flash
+              deepseek/deepseek-v4-pro
+              anthropic/claude-sonnet-5
+              anthropic/claude-fable-5
+              google/gemini-3.5-flash)))
 
 (use-package agent-shell
     :ensure t
@@ -50,43 +42,7 @@
           ;; ollama models configured in ~/.config/opencode/opencode.json
           ;; ... or pick one explicitly
           ;; agent-shell-opencode-default-model-id "openrouter/anthropic/claude-sonnet-4.6"
-          agent-shell-opencode-default-session-mode-id "plan")
-    (defun neo/agent-shell--set-opencode-env (&rest _)
-      "Set OpenCode environment with OPENROUTER_API_KEY lazily."
-      (setq agent-shell-opencode-environment
-            (agent-shell-make-environment-variables
-             "OPENROUTER_API_KEY" (neo/get-openrouter-api-key))))
-    (advice-add 'agent-shell :before #'neo/agent-shell--set-opencode-env))
-
-(use-package aidermacs
-  ;; need aider installed separately:
-  ;;    pip install aider-install
-  ;;    aider-install
-  ;; or
-  ;;    uv tool install aider-chat --python 3.12
-  ;;    uv tool install aider-skills --python 3.12
-  ;;
-  ;; export OLLAMA_API_BASE=http://host:11434
-  ;;
-  ;; need a `~/.aider.conf.yml`:
-  ;;    model: openrouter/anthropic/claude-sonnet-4
-  ;;    editor-model: ollama/qwen2.5-coder:7b
-  ;;    weak-model: ollama/qwen2.5-coder:7b
-  ;;    edit-format: diff
-  ;;    auto-commits: false
-  :ensure t
-  :pin melpa-stable
-  :bind (("C-c v" . aidermacs-transient-menu))
-  :config
-  (defun neo/aidermacs--set-openrouter-key ()
-    "Set OPENROUTER_API_KEY environment variable from auth-source."
-    (let ((api-key (neo/get-openrouter-api-key)))
-      (when api-key
-        (setenv "OPENROUTER_API_KEY" api-key))))
-  (advice-add 'aidermacs-transient-menu :before #'neo/aidermacs--set-openrouter-key)
-  (setq aidermacs-show-diff-after-change nil)
-  :custom
-  (aidermacs-program "aider"))
+          agent-shell-opencode-default-session-mode-id "plan"))
 
 (use-package docker
   :ensure t

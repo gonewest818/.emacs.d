@@ -71,8 +71,7 @@
   (setq ibuffer-show-empty-filter-groups nil)
   ;; Group non-file buffers via their default-directory
   (defvar neo/ibuffer-projectile-nonfile-allowlist-regexps
-    '("\\`\\*aidermacs:.*\\*\\'"          ; *aidermacs:{path}*
-      "\\`OpenCode Agent @ \\S-+\\'"      ; OpenCode Agent @ {path}
+    '("\\`OpenCode Agent @ \\S-+\\'"      ; OpenCode Agent @ {path}
       )
     "Regexps of non-file buffer names allowed to be grouped by projectile.")
   (defun neo/ibuffer-projectile--allowed-nonfile-buffer-p (buf)
