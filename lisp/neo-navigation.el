@@ -75,22 +75,23 @@
       )
     "Regexps of non-file buffer names allowed to be grouped by projectile.")
   (defun neo/ibuffer-projectile--allowed-nonfile-buffer-p (buf)
-    (let ((name (buffer-name buf)))
-      (seq-some (lambda (re) (string-match-p re name))
-                neo/ibuffer-projectile-nonfile-allowlist-regexps)))
+    (with-current-buffer buf
+      (or (let ((name (buffer-name buf)))
+            (seq-some (lambda (re) (string-match-p re name))
+                      neo/ibuffer-projectile-nonfile-allowlist-regexps))
+          (and default-directory (file-remote-p default-directory)))))
   (defun neo/ibuffer-projectile-root--fallback-with-allowlist (orig buf)
     "Let ibuffer-projectile group allowlisted non-file buffers via `default-directory`."
     (or (funcall orig buf)
         (when (neo/ibuffer-projectile--allowed-nonfile-buffer-p buf)
           (with-current-buffer buf
-            (when (and default-directory (file-directory-p default-directory))
-              (let ((root (ignore-errors
-                            (let ((default-directory default-directory))
-                              (projectile-project-root)))))
-                (when root
-                  (cons (let ((default-directory root))
-                          (projectile-project-name))
-                        root))))))))
+            (let ((root (ignore-errors
+                          (let ((default-directory default-directory))
+                            (projectile-project-root)))))
+              (when root
+                (cons (let ((default-directory root))
+                        (projectile-project-name))
+                      root)))))))
   (advice-add 'ibuffer-projectile-root :around
               #'neo/ibuffer-projectile-root--fallback-with-allowlist)
   ;; Works similarly to the ibuffer-projectile default, but we have a

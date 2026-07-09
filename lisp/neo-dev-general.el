@@ -44,6 +44,27 @@
           ;; agent-shell-opencode-default-model-id "openrouter/anthropic/claude-sonnet-4.6"
           agent-shell-opencode-default-session-mode-id "plan"))
 
+(use-package agent-shell-tramp
+  :ensure t
+  :after (quelpa-use-package tramp)
+  :quelpa (agent-shell-tramp :fetcher github :repo "junyi-hou/agent-shell-tramp")
+  :commands  (agent-shell-tramp-mode))
+
+(with-eval-after-load 'tramp
+  ;; Else tramp uses a stripped-down path
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+
+  (defun neo/disable-company-on-tramp ()
+    "Disable Company mode if buffer or shell is hosted over TRAMP."
+    (when (and (fboundp 'tramp-tramp-file-p)
+               (or (tramp-tramp-file-p (or buffer-file-name ""))
+                   (tramp-tramp-file-p default-directory)))
+      (company-mode -1)))
+
+  ;; Disables Company in remote shells/comint buffers
+  (add-hook 'comint-mode-hook #'neo/disable-company-on-tramp)
+  (add-hook 'shell-mode-hook #'neo/disable-company-on-tramp))
+
 (use-package docker
   :ensure t
   :pin melpa
@@ -95,7 +116,8 @@
 
 (use-package envrc
   :ensure t
-  :hook ((after-init . envrc-global-mode)))
+  :hook ((after-init . envrc-global-mode))
+  :config (setq envrc-remote 1))
 
 (use-package flycheck
   :ensure t
