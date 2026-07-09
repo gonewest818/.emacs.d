@@ -58,7 +58,6 @@
 
 (use-package magit
   :ensure t
-  :pin melpa
   :bind (("C-x g"   . magit-status)
          ("C-x M-g" . magit-dispatch-popup))
   :config
@@ -67,10 +66,32 @@
           (,user-emacs-directory . 1)))
   (setq magit-completing-read-function 'ivy-completing-read))
 
+(use-package forge
+  :ensure t
+  :after magit)
+
 (use-package magit-lfs
   :ensure t
-  :pin melpa
   :after magit)
+
+(use-package magit-delta
+  ;; magit-delta requires "delta" from homebrew
+  ;; and the following in your `.gitconfig':
+  ;; [core]
+  ;; 	pager = delta
+  ;; [delta]
+  ;; 	syntax-theme = zenburn
+  ;; 	dark = true
+  ;; 	plus-style = syntax "#5a6f5a"
+  ;; 	minus-style = syntax "#6f5a5a"
+  ;; 	plus-emph-style = syntax "#296529"
+  ;; 	minus-emph-style = syntax "#652929"
+  :ensure t
+  :after magit
+  :hook ((magit-mode . (lambda () (magit-delta-mode +1))))
+  :config
+  (setq magit-delta-default-dark-theme "zenburn"
+        magit-delta-hide-plus-minus-markers nil))
 
 (use-package envrc
   :ensure t
