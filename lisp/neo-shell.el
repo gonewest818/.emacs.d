@@ -4,6 +4,11 @@
 (use-package nvm
   :ensure t)
 
+(use-package vterm
+  :ensure t
+  :config
+  (setq vterm-tramp-shells '((t login-shell "/bin/bash"))))
+
 (use-package eshell
   :bind (("C-c M-e" . eshell))
   :config
