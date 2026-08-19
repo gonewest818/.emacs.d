@@ -28,7 +28,13 @@
            "* TODO %? %^g\n  %t\n  %i\n")
           ("p" "Project Log" entry
            (file+olp+datetree "~/Box/neilo/org/project.org")
-           "* TODO %? %^g\n  %t\n  %i\n"))))
+            "* TODO %? %^g\n  %t\n  %i\n")))
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (python     . t)
+     (shell      . t))))
 
 (use-package org-super-agenda
   :ensure t
