@@ -70,8 +70,9 @@
   :pin melpa
   :diminish "d*"
   :bind ("C-c d" . docker)
-  :config (setq docker-command "podman"
-                docker-compose-command "podman-compose"))
+  :config (setq docker-command "docker"
+                docker-compose-command "docker-compose")
+  )
 
 (use-package dockerfile-mode
   :ensure t

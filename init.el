@@ -82,7 +82,7 @@
     (progn
       (require 'auth-source-pass)
       (auth-source-pass-enable))
-  (setq auth-sources '((:source "~/.authinfo.gpg"))))
+  (setq auth-sources '((:source "~/.authinfo"))))
 (setq epa-pinentry-mode 'loopback)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
